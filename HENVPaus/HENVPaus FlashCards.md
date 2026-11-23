@@ -1260,7 +1260,7 @@ Not in the last 9000 years
 \- Krakatoa
 
 **Is volcanic activity not normal since 1900 and what is its confidence:**  
-No
+No - it is normal
 (Medium confidence)
 
 **In 2019 what was the atmospheric CO2 concentration:**  
@@ -1288,8 +1288,10 @@ Cools
 **Land use change is one of the few human effects that cause:**  
 Cooling
 
-**The concentration of tropospheric aerosols at mid latitudes in NH has ... since ... then ... :**  
+**The concentration of tropospheric aerosols at mid latitudes in NH has ... since ... then ... after ... :**  
 increased since 1700 then decreased after 1975 ish
+
+![](image-8.png)
 
 **Less aerosols means what for climate:**  
 Warmer
@@ -1301,17 +1303,10 @@ Warmer
 Excessive absorption
 
 **The heating of ... is the principal factor explaining the variation in energy inventory:**  
-Ocean heating (high confidence)
+Ocean (high confidence)
 
 **What is the principal contributor to the positive energy forcing:**  
 CO2
-
-**What are the 4 earth systems that we can see effects of climate change:**  
-Ocean  
-Atmosphere  
-Biosphere  
-Cryosphere
-(these are all the systems)
 
 **There has been how much warming during the 2011-2020 period:**  
 +1.09 deg C relative to 1850-1900 base period
@@ -1326,8 +1321,6 @@ Arctic
 Land (1.5 °C vs 0.88 °C)
 
 ![](image.png)
-
-![](image-1.png)
 
 **How has temp change in the troposphere and stratosphere:**  
 Tropo = Warming  
@@ -1353,7 +1346,7 @@ Increased
 
 **How is the water balance dominated differently in the ocean and on land:**  
 Land = more rain  
-Ocean = more precipitation
+Ocean = more evaporation
 
 **Monsoon precipitation has ... since the 1981 with a ... confidence:**  
 increased with a medium confidence
@@ -1435,9 +1428,6 @@ Extreme event distribution
 
 **What is a combo extreme event:**  
 Two or more events that alone are not devastating but are when combined
-
-**Combo events are by definition about:**  
-Teleconnections
 
 **What are the climate extreme indexes (4):**  
 \- Max and Min values  
@@ -1524,6 +1514,9 @@ not enough rain
 **What is a hydrological drought:**  
 not enough ground water / water in rivers
 
+**Normally a ... drought will lead to a ... drought:**
+A meteorological drought will lead to a hydrological drought 
+
 **What causes a agriculture and ecological drought:**  
 When plants are water stressed
 
@@ -1562,7 +1555,7 @@ Thermodynamics
 Dynamics
 
 **What are thermodynamics driving extreme changes:**  
-Regulated by local heat exchange  
+Regulated by local heat, humidity etc. exchange.  
 Responses and feedbacks from surface processes
 
 **What are dynamic drivers of extreme change:**  
@@ -1605,7 +1598,7 @@ Thermodynamic are more global while dynamic are regional and more uncertain
 increase in atmospheric evaporative demand caused by changes in temp, wind speed, relative humidity
 
 **How do dynamic drivers affect drought:**  
-Changes in sunshine duration
+Changes in precipitatoin and sunshine duration
 
 **what is the attribution process for extreme events (5):**  
 \- Identify  
@@ -1642,6 +1635,9 @@ Asks two questions
 
 **Climate change affects what part of the world:**  
 All of it
+
+**What extreme events have the highest confidence:**
+Heat
 
 **What are the 3 categories of impacts:**  
 \- Human and society systems  
