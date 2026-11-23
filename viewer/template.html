@@ -81,7 +81,7 @@
   .header-right { display: flex; gap: 12px; align-items: center; }
   .progress { color: var(--muted); font-variant-numeric: tabular-nums; }
   .tabs {
-    display: flex; gap: 6px; overflow-x: auto; margin: 0 0 12px;
+    display: flex; gap: 6px; overflow-x: auto; overflow-y: hidden; margin: 0 0 12px;
     border-bottom: 1px solid var(--border); scrollbar-width: thin;
   }
   .tabs button {
@@ -116,10 +116,6 @@
   }
   .card.is-marked { border-color: var(--mark); box-shadow: 0 0 0 2px var(--mark) inset; }
   .meta { color: var(--muted); font-size: .85rem; margin-bottom: 12px; padding: 0 30px; }
-  .side-label {
-    color: var(--muted); font-size: .75rem; text-transform: uppercase;
-    letter-spacing: .08em; margin-bottom: 8px;
-  }
   /* The question/answer block takes the free space and centers itself vertically. */
   .face { flex: 1; display: flex; flex-direction: column; justify-content: center; }
   .face-text { font-size: clamp(2.2rem, 5.5vw, 4.2rem); line-height: 1.3; overflow-wrap: anywhere; }
@@ -185,7 +181,6 @@
     <span class="star" aria-hidden="true">★</span>
     <div class="meta" id="meta"></div>
     <div class="face" id="face">
-      <div class="side-label" id="sideLabel">Question</div>
       <div class="face-text" id="faceText"></div>
     </div>
     <div class="hint" id="hint"></div>
@@ -355,7 +350,6 @@
     card: document.getElementById("card"),
     meta: document.getElementById("meta"),
     face: document.getElementById("face"),
-    sideLabel: document.getElementById("sideLabel"),
     faceText: document.getElementById("faceText"),
     hint: document.getElementById("hint"),
     progress: document.getElementById("progress"),
@@ -514,7 +508,6 @@
 
     if (!order.length) {
       el.meta.textContent = "";
-      el.sideLabel.textContent = "";
       el.faceText.textContent = el.markedOnly.checked
         ? "No marked cards yet. Mark cards with the ★ button or the M key."
         : "No cards to show.";      el.hint.textContent = "";
@@ -543,11 +536,9 @@
     el.card.querySelectorAll("img").forEach(function (img) { img.remove(); });
 
     if (!flipped) {
-      el.sideLabel.textContent = "Question";
       el.faceText.textContent = card.question;
       el.hint.textContent = "Tap the card or press Space to reveal the answer";
     } else {
-      el.sideLabel.textContent = "Answer";
       renderAnswer(el.faceText, card.answer);
       card.images.forEach(function (src) {
         const img = document.createElement("img");

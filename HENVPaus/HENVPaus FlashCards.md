@@ -1253,7 +1253,7 @@ Link between forcing and observed change
 Not in the last 9000 years  
 (high)
 
-**What are some key volcanic forcing events:**  
+**What are some key volcanic forcing events (4):**  
 \- Pinatubo  
 \- El Chichon  
 \- Agung  
@@ -1261,8 +1261,7 @@ Not in the last 9000 years
 
 **Is volcanic activity not normal since 1900 and what is its confidence:**  
 No
-
-Medium confidence
+(Medium confidence)
 
 **In 2019 what was the atmospheric CO2 concentration:**  
 409.9 ppm
@@ -1613,7 +1612,6 @@ Changes in sunshine duration
 \- Observer  
 \- Hypothesize  
 \- Test hypothesis
-
 \- Attribute assessment
 
 [image on side 41]
