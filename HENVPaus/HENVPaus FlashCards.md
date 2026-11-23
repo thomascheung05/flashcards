@@ -1333,6 +1333,8 @@ Land (1.5 °C vs 0.88 °C)
 Tropo = Warming  
 Strato = Cooling
 
+![](image-2.png)
+
 **How has tropopause height changed between 1980 and 2018:**  
 Increased globally
 
@@ -1393,7 +1395,7 @@ Seasonal swing has increased (High confidence)
 
 ### Extreme Climate Change
 
-**Climate change does what to extreme events ():**  
+**Climate change does what to extreme events (5):**  
 \- Larger magnitude  
 \- Increase frequency  
 \- New locations  
@@ -1410,23 +1412,20 @@ A rare event at a location at a specific time of the year
 An ensemble of extreme weather phenomena that persist during a certain time (like a season)
 
 **In addition to influencing the frequency, and intensity of extreme events, climate change can also effect:**  
-The probabilistic distribution(increased variability, changes in symmetry), which causes the above changes
+The probabilistic distribution (increased variability, changes in symmetry), which causes the above changes
 
-[diagram slide 8]
-
-**Also climate change affects extreme events ... :**  
-They still occur regardless
+![](image-3.png)
 
 **What is the issue with questions asked about the relationship between climate change and extreme events:**  
 Often too specific and can't be answered by science
 
-**How to reword this question into a scientific way:**  
+**How to reword this question into a scientific way "how has climate change affected extreme events":**  
 To what extent has climate change altered the probability and intensity of an observed event
 
 **This rewording of questions into a more scientific language is called:**  
 Extreme event distribution
 
-**What are the types of climate extremes:**  
+**What are the types of climate extremes (6):**  
 \- Temp  
 \- Precip  
 \- Flood  
@@ -1440,7 +1439,7 @@ Two or more events that alone are not devastating but are when combined
 **Combo events are by definition about:**  
 Teleconnections
 
-**What are the climate extreme indexes:**  
+**What are the climate extreme indexes (4):**  
 \- Max and Min values  
 \- Percentiles  
 \- Length and intensity  
@@ -1452,9 +1451,11 @@ DrinC - Drought index calculator
 **The DrinC is composed of:**  
 Many different indexes
 
+![](image-4.png)
+
 **What is the precip index talked about in the lecture and how do you calculate it:**  
 Standardized Precipitation indexes  
-SPI = Monthly precip - Mean precip / STD of monthly precip
+SPI = Monthly precip - long term Mean precip / STD of monthly precip
 
 **What is a normal conditions SPI value:**  
 0.99 to -0.99
@@ -1466,10 +1467,12 @@ Kindex & Totalx = Thunderstorm potential
 **Future changes in temp averages and extremes will be:**  
 Similar
 
+![](image-5.png)
+
 **Future changes in precip averages and extremes can:**  
 Vary differently
 
-[Diagram on slide 22]
+![](image-6.png)
 
 **The direction and intensity of future extremes compared to the average depends on:**  
 The variable we are looking at
@@ -1483,14 +1486,10 @@ Lowest daily min in each year
 **What is TX90p:**  
 Number of days above the 90th percentile
 
-Front: What does “heterogeneous at the regional scale” mean for climate change, and why does it happen?
-
-What does “heterogeneous at the regional scale” mean for climate change, and why does it happen?
-
 **What does “heterogeneous at the regional scale” mean for climate change, and why does it happen:**  
 Climate change effects vary a lot from place to place. Some regions warm much faster than the global average because of natural climate variability and local processes and feedback. So regional impacts can differ greatly from the global signal
 
-A small change in temperature can cause;  
+**A small change in temperature can cause:**
 A large change in extreme events
 
 **Frequency and intensity of strong precip has … increased at a … scale over most terrestrial regions:**  
@@ -1505,8 +1504,7 @@ Over 3 continents (NA, EU, AS)
 **Strong precip generally becomes more … and … with global warming:**  
 More frequent and intense
 
-**The augmentation of frequency and intensity of extreme precip is … for the majority of continents**  
-**and … for the majority of regions:**  
+**The augmentation of frequency and intensity of extreme precip is … for the majority of continents and … for the majority of regions:**  
 Extremely Probable  
 Very probable
 
@@ -1535,7 +1533,7 @@ Eleve
 **When it comes to drought there is a lot of … and … :**  
 Uncertainty and regional differences
 
-**Where are droughts expected to get worse:**  
+**Where are droughts expected to get worse (4):**  
 \- Africa  
 \- Australia  
 \- Mediterranean  
@@ -1571,22 +1569,20 @@ Responses and feedbacks from surface processes
 Atmospheric and Oceanic movement  
 Things that modify weather phenomena
 
-**What aspects of the global atmospheric circulation are expected to change:**  
+**What aspects of the global atmospheric circulation are expected to change (3):**  
 \- Hadley gets bigger  
 \- Poleward shift of extratropical jet and storm track  
 \- Changing frequency of ENSO events
 
-**At the regional scale, what shapes changes in temperature extremes:**  
+**At the regional scale, what shapes changes in temperature extremes (3):**  
 \- Feedbacks  
 \- Local and regional forcings  
 \- Natural variability
 
-**What are some specific things that affect temperature extremes:**  
+**What are some specific things that affect temperature extremes (3):**  
 \- Anthropogenic aerosols  
 \- irrigation and cropland expansion  
 \- Urbanization
-
-The key message is that greenhouse gases set the overall warming trend, but local land use, aerosols, and natural variability can make the temperature extremes in a given place stronger or weaker than the global signal.
 
 **How do thermodynamic drivers affect precip extremes:**  
 Warmer air holds more water
@@ -1597,7 +1593,7 @@ Changes in atmospheric patterns
 **In terms of precip, thermodynamic drivers are more … scale while dynamic drivers are more … :**  
 Thermodynamic are more global while dynamic are regional and more uncertain
 
-**What are some factors that affect flooding:**  
+**What are some factors that affect flooding (6):**  
 \- Amount and intensity of precip  
 \- Soil humidity  
 \- Water to snow ratio  
@@ -1611,24 +1607,24 @@ increase in atmospheric evaporative demand caused by changes in temp, wind speed
 **How do dynamic drivers affect drought:**  
 Changes in sunshine duration
 
-**what is the attribution process for extreme events:**  
+**what is the attribution process for extreme events (5):**  
 \- Identify  
 \- Observer  
 \- Hypothesize  
 \- Test hypothesis
 \- Attribute assessment
 
-[image on side 41]
+![](image-7.png)
 
 **What is detection Vs attribution of extreme events:**  
 Detection = At what point is an event abnormal in reference to normal climate  
 Attribution = What is the most probable cause of the event
 
-**What are the necessary components for Attribution of extreme events:**  
+**What are the necessary components for Attribution of extreme events (2):**  
 \- Model physics / stats  
 \- Method stats
 
-**What are tools for attribution of extreme events:**  
+**What are tools for attribution of extreme events (2):**  
 \- Observational data  
 \- Model simulations
 
@@ -1639,7 +1635,7 @@ Attribution = What is the most probable cause of the event
 **What is the risk based approach:**  
 How does the probability of a group of events happening change with anthro influence
 
-**What it the narrative approach:**  
+**What it the narrative approach (2):**  
 Asks two questions  
 \- Can the event be explained by atmospheric variability  
 \- How has anthro affected this atmospheric variability
@@ -1652,7 +1648,7 @@ All of it
 \- Ecosystem  
 \- Natural physical environment
 
-**The impact of an extreme event on a population and/or system depends on:**  
+**The impact of an extreme event on a population and/or system depends on (3):**  
 \- Degree of exposure  
 \- Vulnerability  
 \- Magnitude of event
