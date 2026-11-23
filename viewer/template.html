@@ -203,7 +203,7 @@
     <input type="file" id="importFile" accept="application/json,.json">
     <button id="clearBtn">Clear marks</button>
   </div>
-  <span class="keys">Keys: ← → navigate · Space flip · M mark</span>
+  <span class="keys">Keys: ← → navigate · Space flip · Shift mark</span>
 </footer>
 
 <div id="toast" role="status" aria-live="polite"></div>
@@ -650,9 +650,17 @@
   });
 
   // Keyboard shortcuts (ignored while a control has focus).
-  document.addEventListener("keydown", function (e) {
+  // Shift on its own marks the card. It counts only when Shift is pressed
+  // and released with no other key in between, so Shift+arrow doesn't mark.
+  let shiftAlone = false;
+  function typingHere(e) {
     const tag = (e.target && e.target.tagName) || "";
-    if (/INPUT|SELECT|TEXTAREA/.test(tag) && e.target.type !== "checkbox") return;
+    return /INPUT|SELECT|TEXTAREA/.test(tag) && e.target.type !== "checkbox";
+  }
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Shift") { shiftAlone = !e.repeat; return; }
+    shiftAlone = false;
+    if (typingHere(e)) return;
     if (e.metaKey || e.ctrlKey || e.altKey) return;
     switch (e.key) {
       case "ArrowRight": go(1); break;
@@ -662,9 +670,15 @@
       case "ArrowDown":
         if (e.target === el.card || e.target === document.body) { e.preventDefault(); flip(); }
         break;
-      case "m": case "M": toggleMark(); break;
     }
   });
+  document.addEventListener("keyup", function (e) {
+    if (e.key !== "Shift") return;
+    const alone = shiftAlone;
+    shiftAlone = false;
+    if (alone && !typingHere(e)) toggleMark();
+  });
+  window.addEventListener("blur", function () { shiftAlone = false; });
 
   // Swipe left/right on the card to move between cards.
   let touchX = null, touchY = null;
