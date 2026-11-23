@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Flashcards">
+<meta name="theme-color" content="#1f2937">
+<title>Flashcards</title>
+<style>
+  :root {
+    --bg: #f5f5f4;
+    --surface: #ffffff;
+    --text: #1c1917;
+    --muted: #78716c;
+    --accent: #2563eb;
+    --mark: #f59e0b;
+    --border: #d6d3d1;
+    --radius: 14px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #1c1917;
+      --surface: #292524;
+      --text: #f5f5f4;
+      --muted: #a8a29e;
+      --accent: #60a5fa;
+      --mark: #fbbf24;
+      --border: #44403c;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #1c1917;
+    --surface: #292524;
+    --text: #f5f5f4;
+    --muted: #a8a29e;
+    --accent: #60a5fa;
+    --mark: #fbbf24;
+    --border: #44403c;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 17px;
+    line-height: 1.5;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: env(safe-area-inset-top) 16px env(safe-area-inset-bottom);
+  }
+  button, select, input { font: inherit; color: inherit; }
+  button {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 14px;
+    cursor: pointer;
+    min-height: 44px;
+  }
+  button:hover { border-color: var(--accent); }
+  button:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  button.marked { border-color: var(--mark); color: var(--mark); font-weight: 600; }
+
+  header {
+    display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: space-between; padding: 12px 0;
+  }
+  header h1 { font-size: 1.1rem; margin: 0; }
+  .progress { color: var(--muted); font-variant-numeric: tabular-nums; }
+  .controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  select {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 10px; min-height: 44px; max-width: 100%;
+  }
+  label.toggle { display: inline-flex; gap: 6px; align-items: center; min-height: 44px; }
+
+  main { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+
+  .card {
+    flex: 1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    display: flex; flex-direction: column;
+    min-height: 320px;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
+  }
+  .card.is-marked { border-color: var(--mark); box-shadow: 0 0 0 2px var(--mark) inset; }
+  .meta { color: var(--muted); font-size: .85rem; margin-bottom: 12px; }
+  .side-label {
+    color: var(--muted); font-size: .75rem; text-transform: uppercase;
+    letter-spacing: .08em; margin-bottom: 8px;
+  }
+  .face-text { font-size: 1.25rem; white-space: normal; overflow-wrap: anywhere; }
+  .answer-line { margin: 0 0 .4em; }
+  .answer-line.sub { padding-left: 1em; }
+  .hint { margin-top: auto; padding-top: 16px; color: var(--muted); font-size: .85rem; }
+  .card img {
+    display: block; max-width: 100%; height: auto; margin: 14px auto 0;
+    border-radius: 8px; background: #fff;
+  }
+  .star {
+    position: absolute; top: 14px; right: 16px; font-size: 1.4rem;
+    color: var(--mark); display: none;
+  }
+  .card.is-marked .star { display: block; }
+  .empty { padding: 40px 10px; text-align: center; color: var(--muted); }
+
+  .nav { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin: 14px 0; }
+  .nav button { font-size: 1.05rem; }
+
+  footer {
+    border-top: 1px solid var(--border); padding: 14px 0 20px; margin-top: 8px;
+    display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between;
+  }
+  footer .group { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  .keys { color: var(--muted); font-size: .8rem; }
+  #toast {
+    position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom));
+    transform: translateX(-50%); background: var(--text); color: var(--bg);
+    padding: 10px 16px; border-radius: 10px; opacity: 0; transition: opacity .2s;
+    pointer-events: none; max-width: 90vw; text-align: center;
+  }
+  #toast.show { opacity: 1; }
+  input[type="file"] { display: none; }
+
+  @media (max-width: 600px) {
+    body { font-size: 16px; }
+    .face-text { font-size: 1.15rem; }
+    .card { min-height: 280px; padding: 16px; }
+    .keys { display: none; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Flashcards</h1>
+  <span class="progress" id="progress"></span>
+</header>
+
+<div class="controls">
+  <select id="lecture" aria-label="Filter by lecture"></select>
+  <label class="toggle"><input type="checkbox" id="markedOnly"> Marked only</label>
+  <label class="toggle"><input type="checkbox" id="shuffle"> Shuffle</label>
+</div>
+
+<main>
+  <div class="card" id="card" role="button" tabindex="0" aria-label="Flip card">
+    <span class="star" aria-hidden="true">★</span>
+    <div class="meta" id="meta"></div>
+    <div class="side-label" id="sideLabel">Question</div>
+    <div class="face-text" id="faceText"></div>
+    <div class="hint" id="hint">Tap the card or press Space to reveal the answer</div>
+  </div>
+
+  <div class="nav">
+    <button id="prev" aria-label="Previous card">← Prev</button>
+    <button id="flip" class="primary">Flip</button>
+    <button id="next" aria-label="Next card">Next →</button>
+  </div>
+  <div style="text-align:center">
+    <button id="markBtn">★ Mark as difficult</button>
+  </div>
+</main>
+
+<footer>
+  <div class="group">
+    <button id="exportBtn">Export marks</button>
+    <button id="importBtn">Import marks</button>
+    <input type="file" id="importFile" accept="application/json,.json">
+    <button id="clearBtn">Clear marks</button>
+  </div>
+  <span class="keys">Keys: ← → navigate · Space flip · M mark</span>
+</footer>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  "use strict";
+
+  // Filled in by build.py.
+  const ALL_CARDS = /*__CARDS__*/[];
+
+  const STORAGE_KEY = "flashcards:marks:v1";
+
+  // ---------- marks (persisted per browser; storage can be unavailable) ----------
+  function loadMarks() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return new Set(raw ? JSON.parse(raw) : []);
+    } catch (e) {
+      return new Set();
+    }
+  }
+  function saveMarks() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify([...marks]));
+    } catch (e) {
+      toast("Couldn't save marks in this browser");
+    }
+  }
+  const marks = loadMarks();
+
+  // ---------- state ----------
+  const el = {
+    lecture: document.getElementById("lecture"),
+    markedOnly: document.getElementById("markedOnly"),
+    shuffle: document.getElementById("shuffle"),
+    card: document.getElementById("card"),
+    meta: document.getElementById("meta"),
+    sideLabel: document.getElementById("sideLabel"),
+    faceText: document.getElementById("faceText"),
+    hint: document.getElementById("hint"),
+    progress: document.getElementById("progress"),
+    markBtn: document.getElementById("markBtn"),
+    prev: document.getElementById("prev"),
+    next: document.getElementById("next"),
+    flip: document.getElementById("flip"),
+    exportBtn: document.getElementById("exportBtn"),
+    importBtn: document.getElementById("importBtn"),
+    importFile: document.getElementById("importFile"),
+    clearBtn: document.getElementById("clearBtn"),
+    toast: document.getElementById("toast"),
+  };
+
+  let order = [];      // cards currently in play, in display order
+  let index = 0;       // position within `order`
+  let flipped = false; // showing the answer side?
+
+  // ---------- helpers ----------
+  function el_(tag, cls, text) {
+    const node = document.createElement(tag);
+    if (cls) node.className = cls;
+    if (text !== undefined) node.textContent = text;
+    return node;
+  }
+
+  // Render answer lines with **bold** support, without using innerHTML.
+  function renderAnswer(container, lines) {
+    container.textContent = "";
+    lines.forEach(function (line) {
+      const indented = /^\s/.test(line);
+      const p = el_("p", "answer-line" + (indented ? " sub" : ""));
+      const parts = line.split(/\*\*(.+?)\*\*/);
+      parts.forEach(function (part, i) {
+        if (!part) return;
+        p.appendChild(i % 2 === 1 ? el_("strong", null, part) : document.createTextNode(part));
+      });
+      container.appendChild(p);
+    });
+  }
+
+  function toast(msg) {
+    el.toast.textContent = msg;
+    el.toast.classList.add("show");
+    clearTimeout(toast._t);
+    toast._t = setTimeout(function () { el.toast.classList.remove("show"); }, 2200);
+  }
+
+  function shuffleArray(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  // ---------- building the deck in play ----------
+  function rebuildOrder(keepCardId) {
+    let list = ALL_CARDS.slice();
+    const lec = el.lecture.value;
+    if (lec !== "") list = list.filter(function (c) { return c.lecture === lec; });
+    if (el.markedOnly.checked) list = list.filter(function (c) { return marks.has(c.id); });
+    if (el.shuffle.checked) shuffleArray(list);
+    order = list;
+
+    // Keep the same card selected if it is still in the list.
+    const keep = keepCardId ? order.findIndex(function (c) { return c.id === keepCardId; }) : -1;
+    index = keep >= 0 ? keep : 0;
+    flipped = false;
+  }
+
+  function populateLectures() {
+    const lectures = [];
+    ALL_CARDS.forEach(function (c) {
+      if (lectures.indexOf(c.lecture) === -1) lectures.push(c.lecture);
+    });
+    el.lecture.textContent = "";
+    el.lecture.appendChild(new Option("All lectures (" + ALL_CARDS.length + ")", ""));
+    lectures.forEach(function (lec) {
+      const count = ALL_CARDS.filter(function (c) { return c.lecture === lec; }).length;
+      el.lecture.appendChild(new Option((lec || "Unsorted") + " (" + count + ")", lec));
+    });
+  }
+
+  // ---------- rendering ----------
+  function render() {
+    el.progress.textContent = order.length
+      ? (index + 1) + " / " + order.length + " · ★ " + marks.size + " marked"
+      : "★ " + marks.size + " marked";
+
+    if (!order.length) {
+      el.meta.textContent = "";
+      el.sideLabel.textContent = "";
+      el.faceText.textContent = el.markedOnly.checked
+        ? "No marked cards yet. Mark cards with the ★ button or the M key."
+        : "No cards to show.";
+      el.hint.textContent = "";
+      el.card.classList.remove("is-marked");
+      el.card.style.cursor = "default";
+      el.markBtn.disabled = true;
+      el.prev.disabled = el.next.disabled = el.flip.disabled = true;
+      return;
+    }
+
+    el.prev.disabled = el.next.disabled = el.flip.disabled = false;
+    el.markBtn.disabled = false;
+    el.card.style.cursor = "pointer";
+
+    const card = order[index];
+    const isMarked = marks.has(card.id);
+    el.card.classList.toggle("is-marked", isMarked);
+    el.markBtn.textContent = isMarked ? "★ Marked (unmark)" : "★ Mark as difficult";
+    el.markBtn.classList.toggle("marked", isMarked);
+
+    el.meta.textContent = [card.lecture, card.topic].filter(Boolean).join(" · ");
+    el.flip.textContent = flipped ? "Show question" : "Show answer";
+
+    // Clear the card body, then fill the active side.
+    el.faceText.textContent = "";
+    const old = el.card.querySelectorAll("img");
+    old.forEach(function (img) { img.remove(); });
+
+    if (!flipped) {
+      el.sideLabel.textContent = "Question";
+      el.faceText.textContent = card.question;
+      el.hint.textContent = "Tap the card or press Space to reveal the answer";
+    } else {
+      el.sideLabel.textContent = "Answer";
+      renderAnswer(el.faceText, card.answer);
+      card.images.forEach(function (src) {
+        const img = document.createElement("img");
+        img.src = src;
+        img.alt = "";
+        img.loading = "lazy";
+        el.card.insertBefore(img, el.hint);
+      });
+      el.hint.textContent = "Tap the card or press Space to see the question";
+    }
+  }
+
+  // ---------- actions ----------
+  function go(delta) {
+    if (!order.length) return;
+    index = (index + delta + order.length) % order.length;
+    flipped = false;
+    render();
+  }
+  function flip() {
+    if (!order.length) return;
+    flipped = !flipped;
+    render();
+  }
+  function toggleMark() {
+    if (!order.length) return;
+    const card = order[index];
+    if (marks.has(card.id)) {
+      marks.delete(card.id);
+    } else {
+      marks.add(card.id);
+    }
+    saveMarks();
+    if (el.markedOnly.checked) {
+      // The card may have just left the list; rebuild and stay close to it.
+      const stayAt = index;
+      rebuildOrder(marks.has(card.id) ? card.id : null);
+      if (!marks.has(card.id) && order.length) index = Math.min(stayAt, order.length - 1);
+      flipped = false;
+    }
+    render();
+  }
+
+  function exportMarks() {
+    const data = {
+      app: "flashcards",
+      version: 1,
+      exported: new Date().toISOString(),
+      marked: [...marks].sort(),
+    };
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "flashcard-marks-" + new Date().toISOString().slice(0, 10) + ".json";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+    toast("Exported " + marks.size + " marks");
+  }
+
+  // Import MERGES with the marks already on this device.
+  // Marks removed on one device are not removed on the other; use
+  // "Clear marks" first on the device if you want a clean start.
+  function importMarks(file) {
+    const reader = new FileReader();
+    reader.onload = function () {
+      try {
+        const data = JSON.parse(reader.result);
+        const list = Array.isArray(data) ? data : data.marked;
+        if (!Array.isArray(list)) throw new Error("no marks list");
+        const before = marks.size;
+        list.forEach(function (id) { if (typeof id === "string") marks.add(id); });
+        saveMarks();
+        const added = marks.size - before;
+        rebuildOrder(order.length ? order[index].id : null);
+        render();
+        toast("Imported " + list.length + " marks (" + added + " new)");
+      } catch (e) {
+        toast("That file isn't a valid marks export");
+      }
+    };
+    reader.readAsText(file);
+  }
+
+  // ---------- events ----------
+  el.card.addEventListener("click", function () {
+    if (swiped) { swiped = false; return; }
+    flip();
+  });
+  el.card.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") { e.preventDefault(); flip(); }
+  });
+  el.prev.addEventListener("click", function () { go(-1); });
+  el.next.addEventListener("click", function () { go(1); });
+  el.flip.addEventListener("click", flip);
+  el.markBtn.addEventListener("click", toggleMark);
+
+  el.lecture.addEventListener("change", function () { rebuildOrder(); render(); });
+  el.markedOnly.addEventListener("change", function () { rebuildOrder(); render(); });
+  el.shuffle.addEventListener("change", function () { rebuildOrder(); render(); });
+
+  el.exportBtn.addEventListener("click", exportMarks);
+  el.importBtn.addEventListener("click", function () { el.importFile.click(); });
+  el.importFile.addEventListener("change", function () {
+    if (el.importFile.files[0]) importMarks(el.importFile.files[0]);
+    el.importFile.value = "";
+  });
+  el.clearBtn.addEventListener("click", function () {
+    if (!marks.size) { toast("No marks to clear"); return; }
+    if (!confirm("Remove all " + marks.size + " marks from this device?")) return;
+    marks.clear();
+    saveMarks();
+    rebuildOrder(order.length ? order[index].id : null);
+    render();
+    toast("Marks cleared on this device");
+  });
+
+  // Keyboard shortcuts (ignored while a control has focus).
+  document.addEventListener("keydown", function (e) {
+    const tag = (e.target && e.target.tagName) || "";
+    if (/INPUT|SELECT|TEXTAREA/.test(tag) && e.target.type !== "checkbox") return;
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    switch (e.key) {
+      case "ArrowRight": go(1); break;
+      case "ArrowLeft": go(-1); break;
+      case " ":
+      case "ArrowUp":
+      case "ArrowDown":
+        if (e.target === el.card || e.target === document.body) { e.preventDefault(); flip(); }
+        break;
+      case "m": case "M": toggleMark(); break;
+    }
+  });
+
+  // Swipe left/right on the card to move between cards.
+  let touchX = null, touchY = null, swiped = false;
+  el.card.addEventListener("touchstart", function (e) {
+    swiped = false;
+    touchX = e.touches[0].clientX;
+    touchY = e.touches[0].clientY;
+  }, { passive: true });
+  el.card.addEventListener("touchend", function (e) {
+    if (touchX === null) return;
+    const dx = e.changedTouches[0].clientX - touchX;
+    const dy = e.changedTouches[0].clientY - touchY;
+    touchX = null;
+    if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      swiped = true;
+      go(dx < 0 ? 1 : -1);
+    }
+  }, { passive: true });
+
+  // ---------- start ----------
+  populateLectures();
+  rebuildOrder();
+  render();
+})();
+</script>
+</body>
+</html>
