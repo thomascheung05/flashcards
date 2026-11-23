@@ -1279,8 +1279,8 @@ high confidence
 **What was the substitute for CFC:**  
 HCFC
 
-**What is the bio physique effect of land use change:**  
-deforestation and agriculture increase albedo
+**What is the bio physical effect of land use change:**  
+Deforestation and Agriculture increase albedo
 
 **Biophysic effect of land use change does what to climate:**  
 Cools
