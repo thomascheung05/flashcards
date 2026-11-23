@@ -203,7 +203,7 @@
     <input type="file" id="importFile" accept="application/json,.json">
     <button id="clearBtn">Clear marks</button>
   </div>
-  <span class="keys">Keys: ← → navigate · ↑ flip · ↓ mark</span>
+  <span class="keys">Keys: ← → navigate · ↑ mark · ↓ flip</span>
 </footer>
 
 <div id="toast" role="status" aria-live="polite"></div>
@@ -651,7 +651,7 @@
 
   // Keyboard shortcuts (ignored while a control has focus).
   // Keyboard shortcuts (ignored while a control has focus).
-  // Up arrow flips the card, Down arrow marks it, Left/Right move between cards.
+  // Up arrow marks the card, Down arrow flips it, Left/Right move between cards.
   document.addEventListener("keydown", function (e) {
     const tag = (e.target && e.target.tagName) || "";
     if (/INPUT|SELECT|TEXTAREA/.test(tag) && e.target.type !== "checkbox") return;
@@ -662,7 +662,7 @@
       case "ArrowUp":
       case "ArrowDown":
         if (e.target === el.card || e.target === document.body) e.preventDefault();
-        if (e.key === "ArrowUp") flip(); else toggleMark();
+        if (e.key === "ArrowUp") toggleMark(); else flip();
         break;
     }
   });
