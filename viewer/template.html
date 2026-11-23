@@ -80,6 +80,17 @@
   header h1 { font-size: 1.1rem; margin: 0; }
   .header-right { display: flex; gap: 12px; align-items: center; }
   .progress { color: var(--muted); font-variant-numeric: tabular-nums; }
+  .tabs {
+    display: flex; gap: 6px; overflow-x: auto; margin: 0 0 12px;
+    border-bottom: 1px solid var(--border); scrollbar-width: thin;
+  }
+  .tabs button {
+    background: none; border: 0; border-bottom: 3px solid transparent; border-radius: 0;
+    padding: 10px 14px; color: var(--muted); font-weight: 600; white-space: nowrap;
+    margin-bottom: -1px;
+  }
+  .tabs button:hover:not(:disabled) { border-color: transparent; color: var(--text); }
+  .tabs button[aria-selected="true"] { color: var(--accent); border-bottom-color: var(--accent); }
   .controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
   select {
     background: var(--surface); border: 1px solid var(--border);
@@ -159,6 +170,8 @@
   </div>
 </header>
 
+<div class="tabs" id="courses" role="tablist" aria-label="Courses"></div>
+
 <div class="controls">
   <select id="lecture" aria-label="Filter by lecture"></select>
   <label class="toggle"><input type="checkbox" id="markedOnly"> Marked only</label>
@@ -200,11 +213,13 @@
 (function () {
   "use strict";
 
-  // Filled in by build.py: the markdown files as they were at build time.
+  // Filled in by build.py: the markdown files as they were at build time,
+  // each tagged with its course (the folder it lives in).
   const SOURCES = /*__SOURCES__*/[];
 
   const MARKS_KEY = "flashcards:marks:v1";
   const THEME_KEY = "flashcards:theme:v1";
+  const COURSE_KEY = "flashcards:course:v1";
 
   const LECTURE_RE = /^##\s+(.+?)\s*:?\s*$/;
   const TOPIC_RE = /^###\s+(.+?)\s*$/;
@@ -291,7 +306,9 @@
   // question has appeared so far.
   function buildCards(srcs) {
     const all = [];
-    srcs.forEach(function (s) { all.push.apply(all, parseSource(s.file, s.text)); });
+    srcs.forEach(function (s) {
+      parseSource(s.file, s.text).forEach(function (c) { c.course = s.course; all.push(c); });
+    });
     const seen = new Map();
     all.forEach(function (c) {
       const n = (seen.get(c.question) || 0) + 1;
@@ -303,6 +320,9 @@
 
   // ---------- state ----------
   const cards = buildCards(SOURCES);
+  const courses = [];     // course names, in the order the folders are sorted
+  cards.forEach(function (c) { if (courses.indexOf(c.course) === -1) courses.push(c.course); });
+  let course = "";        // the course tab that is open
   let order = [];         // cards currently in play, in display order
   let numberOf = new Map(); // card id -> its number within the lecture filter
   let deckSize = 0;       // how many cards the lecture filter contains
@@ -324,6 +344,7 @@
 
   // ---------- DOM refs ----------
   const el = {
+    courses: document.getElementById("courses"),
     lecture: document.getElementById("lecture"),
     markedOnly: document.getElementById("markedOnly"),
     shuffle: document.getElementById("shuffle"),
@@ -383,6 +404,17 @@
 
   function currentCard() { return order[index] || null; }
 
+  // Images sit in their course folder, so the page resolves them there.
+  // Absolute URLs and data: URIs are used as they are.
+  function imageUrl(card, src) {
+    if (/^(https?:|data:|\/)/i.test(src)) return src;
+    return encodeURIComponent(card.course) + "/" + src;
+  }
+
+  function courseCards() {
+    return cards.filter(function (c) { return c.course === course; });
+  }
+
   // ---------- theme ----------
   function systemPrefersDark() {
     return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -413,7 +445,8 @@
   // change the numbers.
   function rebuildOrder(keepId, fallbackIndex) {
     const lec = el.lecture.value;
-    const inLecture = lec === "" ? cards.slice() : cards.filter(function (c) { return c.lecture === lec; });
+    const inCourse = courseCards();
+    const inLecture = lec === "" ? inCourse : inCourse.filter(function (c) { return c.lecture === lec; });
     numberOf = new Map(inLecture.map(function (c, i) { return [c.id, i + 1]; }));
     deckSize = inLecture.length;
 
@@ -429,14 +462,43 @@
   }
 
   function populateLectures() {
+    const inCourse = courseCards();
     const lectures = [];
-    cards.forEach(function (c) { if (lectures.indexOf(c.lecture) === -1) lectures.push(c.lecture); });
+    inCourse.forEach(function (c) { if (lectures.indexOf(c.lecture) === -1) lectures.push(c.lecture); });
     el.lecture.textContent = "";
-    el.lecture.appendChild(new Option("All lectures (" + cards.length + ")", ""));
+    el.lecture.appendChild(new Option("All lectures (" + inCourse.length + ")", ""));
     lectures.forEach(function (lec) {
-      const count = cards.filter(function (c) { return c.lecture === lec; }).length;
+      const count = inCourse.filter(function (c) { return c.lecture === lec; }).length;
       el.lecture.appendChild(new Option((lec || "Unsorted") + " (" + count + ")", lec));
     });
+  }
+
+  // One tab per course. Switching courses resets the lecture filter.
+  function buildCourseTabs() {
+    el.courses.textContent = "";
+    courses.forEach(function (name) {
+      const tab = elem("button", null, name);
+      tab.type = "button";
+      tab.setAttribute("role", "tab");
+      tab.dataset.course = name;
+      tab.addEventListener("click", function () { setCourse(name); });
+      el.courses.appendChild(tab);
+    });
+    markCourseTab();
+  }
+  function markCourseTab() {
+    el.courses.querySelectorAll("[role=tab]").forEach(function (tab) {
+      tab.setAttribute("aria-selected", String(tab.dataset.course === course));
+    });
+  }
+  function setCourse(name) {
+    if (name === course) return;
+    course = name;
+    try { localStorage.setItem(COURSE_KEY, name); } catch (e) { /* not saved; fine */ }
+    markCourseTab();
+    populateLectures();
+    rebuildOrder();
+    render();
   }
 
   // ---------- rendering ----------
@@ -450,8 +512,7 @@
       el.sideLabel.textContent = "";
       el.faceText.textContent = el.markedOnly.checked
         ? "No marked cards yet. Mark cards with the ★ button or the M key."
-        : "No cards to show.";
-      el.hint.textContent = "";
+        : "No cards to show.";      el.hint.textContent = "";
       el.card.classList.remove("is-marked");
       el.card.style.cursor = "default";
       el.markBtn.disabled = true;
@@ -485,7 +546,7 @@
       renderAnswer(el.faceText, card.answer);
       card.images.forEach(function (src) {
         const img = document.createElement("img");
-        img.src = src;
+        img.src = imageUrl(card, src);
         img.alt = "";
         img.loading = "lazy";
         el.card.insertBefore(img, el.hint);
@@ -628,6 +689,15 @@
   }, { passive: true });
 
   // ---------- start ----------
+  // Open the last course used on this device, or the first one.
+  let startCourse = courses[0] || "";
+  try {
+    const saved = localStorage.getItem(COURSE_KEY);
+    if (saved && courses.indexOf(saved) !== -1) startCourse = saved;
+  } catch (e) { /* no saved choice; fine */ }
+  course = startCourse;
+
+  buildCourseTabs();
   populateLectures();
   rebuildOrder();
   render();

@@ -1,9 +1,20 @@
 # flashcards
 ## Flashcard viewer
 
-Every `.md` file in the repo (except this README) is turned into flashcards.
+Each course lives in its own folder, with its `.md` file(s) and an `fi/` folder for its images:
+
+    HENVPaus/
+        HENVPaus FlashCards.md
+        fi/p02_001.png
+    Another Course/
+        Another Course.md
+        fi/...
+
+Every folder that contains a `.md` file becomes a course tab at the top of the site.
 Each `**Question:**` line starts a card, and the lines under it are the answer.
 Images on their own line (`![](fi/...)`) appear on the answer side of the card above them.
+The path is relative to the course folder, so keep the `fi/` folder inside it.
+The site remembers the last course you opened on this device.
 
 Build locally:
 
