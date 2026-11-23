@@ -61,7 +61,7 @@ PSC take HNO3 out of stratosphere meaning ClO is not put into reservoir species
 When earth axis is not tilted towards or away from the sun  
 12 hour day 12 hour night
 
-![](fi/p02_001.png)
+![](p02_001.png)
 
 **What are the solstices:**  
 When earth is max titled towards or away sun
@@ -77,7 +77,7 @@ Civil = 0-6°
 Nautical = 6-12°  
 Astronomical 12-18°
 
-![](fi/p02_002.png)
+![](p02_002.png)
 
 **Why is twilight longer at higher latitudes:**  
 The suns course is titled at shallow and oblique angle relative to horizon  
@@ -88,7 +88,7 @@ Theoretical object that absorbs all incoming rad
 (None passes through none reflected)  
 And re-emits the max amount of energy for its temperature
 
-![](fi/p02_003.png)
+![](p02_003.png)
 
 **A black body re-emits at what wavelength:**  
 All of them
@@ -130,11 +130,11 @@ Hotter object = emits shorter wavelength
 \- rse is radius sun to earth  
 \- Multiply this fraction by the total, then divide by earth surface area to get watts per m2
 
-![](fi/p03_004.png)
+![](p03_004.png)
 
-![](fi/p03_005.png)
+![](p03_005.png)
 
-![](fi/p03_006.png)
+![](p03_006.png)
 
 **An albedo of 0.3 means what:**  
 30% is reflected
@@ -144,9 +144,9 @@ Hotter object = emits shorter wavelength
 πR2 cause sun energy only hits cross section of earth (area of circle)  
 4πR2 cause earth radiates out in all directions as a sphere (area of sphere)
 
-![](fi/p03_008.png)
+![](p03_008.png)
 
-![](fi/p03_007.png)
+![](p03_007.png)
 
 **The atmospheric window is between what λ:**  
 8-12 μm
@@ -192,7 +192,7 @@ Out = ε\* σ\* T earth ^4
 Create 1 equation for TAO balance and 1 for Earth Balance  
 Solve TOA for Temp Atmo then solve Earth
 
-![](fi/p05_009.png)
+![](p05_009.png)
 
 **When we consider emissivity and the GHG effect what average temp do we get for earth:**  
 15°C
@@ -204,7 +204,7 @@ About 0.77
 Increase  
 More GHG effect
 
-![](fi/p05_010.png)
+![](p05_010.png)
 
 **What is the formula for effective radiating level:**  
 (temp surface - 255) / lapse rate  
@@ -229,7 +229,7 @@ Outgoing Longwave Radiation
 (The surface emits as a blackbody (σT₀⁴), and a fraction (1−ε) passes through each layer)  
 OLR = εσT₂⁴ + (1−ε)εσT₁⁴ + (1−ε)²σT₀⁴
 
-![](fi/p06_011.png)
+![](p06_011.png)
 
 **What do we do to the OLR equation to find the effects of changing emissivity on OLR:**  
 Take derivative
@@ -239,7 +239,7 @@ Take derivative
 \- Second term add 2 to ε, remove ε outside bracket  
 \- Third term exponent rule the bracket and switch to ε-1
 
-![](fi/p06_012.png)
+![](p06_012.png)
 
 **What does the derivative of the OLR equation tell us:**  
 As emissivity increases OLR decreases and therefore surface temp must increase  
@@ -262,9 +262,9 @@ No GHG effect
 There is more CO2 but kirchoff law says atmo will release as much as it absorbs  
 And because atmo is same temp as earth, whether the OLR comes from the ground or atmo does not matter
 
-![](fi/p06_013.png)
+![](p06_013.png)
 
-![](fi/p06_014.png)
+![](p06_014.png)
 
 **When is the derivative of the OLR equation not negative and what does this mean for OLR:**  
 When temp does not decrease with altitude like in stratosphere  
@@ -282,7 +282,7 @@ Decreases
 **If T0 < T1 < T2 and emissivity increases what happens to OLR:**  
 Increases
 
-![](fi/p07_015.png)
+![](p07_015.png)
 
 **If atmosphere ε = 1 what does this tell us about the atmosphere:**  
 All outgoing radiation is absorbed by atmosphere and re-emitted by atmosphere
@@ -312,7 +312,7 @@ Inverse square law
 **What is the zenith angle:**  
 Angle between sun position and 90° to the surface
 
-![](fi/p08_017.png)
+![](p08_017.png)
 
 **How do you find how much energy is hitting earth when sun is at angle:**  
 Multiply energy by cos(θ)
@@ -323,7 +323,7 @@ Multiply energy by cos(θ)
 **At what latitude do we start to get a global energy deficit:**  
 40° N and S
 
-![](fi/p08_016.png)
+![](p08_016.png)
 
 **Why does the sahara have relatively low solar flux:**  
 Sand High albedo so most of it is reflected
@@ -374,7 +374,7 @@ At mid latitudes, the atmosphere transports much more than the ocean Compared to
 **Where is the only place that the ocean transports more energy the atmosphere:**  
 Equator and only by a little bit
 
-![](fi/p09_018.png)
+![](p09_018.png)
 
 **If there was no ocean transporting energy at equator what would happen to global energy transport:**  
 The atmosphere would transport more  
@@ -385,7 +385,7 @@ It needs to balance
 \- Condensation latent heat  
 \- Sensible heat from surface to atmosphere
 
-![](fi/p09_019.png)
+![](p09_019.png)
 
 **What is convection:**  
 Warmer less dense things rise above colder denser things
@@ -394,7 +394,7 @@ Warmer less dense things rise above colder denser things
 The three main convection cells on earth  
 (Hadley, Ferrel, Polar)
 
-![](fi/p09_020.png)
+![](p09_020.png)
 
 **Which of the MMCs are indirect and what does this mean:**  
 Ferrel is indirect
@@ -413,14 +413,14 @@ Ferrel
 N/S Wind speed \* Temperature [averaged around a latitude]  
 Flux of energy being transported north
 
-![](fi/p10_021.png)
+![](p10_021.png)
 
 **Total eddy flux consists of these terms (3):**  
 \- MMC  
 \- Stationary eddies (monsoons, mountains)  
 \- Transient eddies (storms)
 
-![](fi/p10_022.png)
+![](p10_022.png)
 
 **Stationary eddies are also known as:**  
 Stationary Rosby waves
@@ -438,7 +438,7 @@ Time mean (‘)
 **Stationary Eddie’s are deviations from …:**  
 Zonal mean (\*)
 
-![](fi/p10_023.png)
+![](p10_023.png)
 
 **The jet stream is not an eddy it is apart of the:**  
 Mean flow
@@ -457,7 +457,7 @@ Temp gradient is much much weaker
 **Where does energy flux by eddy transport dominate over flux by MMC:**  
 Extratropics All around 45°
 
-![](fi/p11_024.png)
+![](p11_024.png)
 
 ## Lecture 02.2:
 
@@ -495,7 +495,7 @@ Normally 100kg/m3
 **When water temperature is low, density is increasingly depended on:**  
 Salt content
 
-![](fi/p12_025.png)
+![](p12_025.png)
 
 **As salinity increases, freezing temp:**  
 Decreases
@@ -514,7 +514,7 @@ to stop convection from moving the very cold top layer down which curls warmer w
 
 **In the water density formula what is alpha:**
 
-![](fi/p12_026.png)
+![](p12_026.png)
 
 Coefficient of thermal dilation  
 Increases as water pressure increases
@@ -552,7 +552,7 @@ Deep water makes it to surface here
 Deepest = Mid latitudes in N and S (Lots of wind mixing and temperature change)  
 Shallowest = Equator (Constant hot water capping the surface)
 
-![](fi/p13_027.png)
+![](p13_027.png)
 
 **At what depth does density largely stop increasing:**  
 1 km
@@ -575,7 +575,7 @@ More winds for mixing
 \- Coriolis effect deflects ocean current  
 \- Current pulls water below it decreasing in strength with depth
 
-![](fi/p14_028.png)
+![](p14_028.png)
 
 **Eckman transport occurs at what angle to the prevailing wind direction:**  
 90° (The net of the corkscrew spiral going downwards)
@@ -588,13 +588,13 @@ More winds for mixing
 \- Equatorial  
 \- Coastal
 
-![](fi/p14_029.png)
+![](p14_029.png)
 
 **Generally, what causes oceanic gyres (2):**  
 Winds going in opposite directions  
 With land containing everything
 
-![](fi/p14_030.png)
+![](p14_030.png)
 
 **What is an STG and SPG:**  
 Sub tropical and Sub polar Gyres
@@ -645,7 +645,7 @@ Walker
 \- Warm pool near indo  
 \- Colder tongue extending from Peru out into the pacific
 
-![](fi/p15_031.png)
+![](p15_031.png)
 
 **When is the ENSO the strongest:**  
 December
@@ -667,12 +667,12 @@ La nina conditions
 **What do El Nino conditions look like:**  
 Warm pool extends into center of pacific and SA coast is warm
 
-![](fi/p16_032.png)
+![](p16_032.png)
 
 **What do La Nina conditions look like:**  
 Very cold tongue extends from peru to mid pacific
 
-![](fi/p16_033.png)
+![](p16_033.png)
 
 **La nina are … but … :**  
 Less intense but last longer
@@ -681,12 +681,12 @@ Less intense but last longer
 Pressure diff between Darwin and Tahiti  
 ENSO is on equator but these locations are not on equator
 
-![](fi/p16_034.png)
+![](p16_034.png)
 
 **What is the Equatorial Southern Oscillation ENSO Index:**  
 Pressure diff between Indo and east equatorial pacific
 
-![](fi/p16_035.png)
+![](p16_035.png)
 
 **What is the SST ENSO Index:**  
 Looks at SST at different parts of equatorial pacific
@@ -699,7 +699,7 @@ Cloud position is defining feature of ENSO
 
 (Blue = less OLR, Red = more)
 
-![](fi/p17_037.png)
+![](p17_037.png)
 
 **Does the image above represents El nino or La nina conditions, why:**  
 El Nino  
@@ -715,9 +715,9 @@ The strengths of many indices
 \- Cold Tongue  
 \- Warm pool
 
-![](fi/p17_038.png)
+![](p17_038.png)
 
-![](fi/p17_039.png)
+![](p17_039.png)
 
 **What is the Bjerknes feedback (6 steps):**
 
@@ -737,7 +737,7 @@ Less upwelling (less offshore wind)
 Kelvin waves bounce off NA sending warm water north  
 Changes shape of Aleutian low by warming California region
 
-![](fi/p17_036.png)
+![](p17_036.png)
 
 Creating Horseshoe of warm water along NA coastline
 
@@ -751,7 +751,7 @@ North Pacific Gyre Oscillation
 Warm = Cold elution low, hot West NA coastline and hot tongue off SA  
 Cold = Hot elution low, cold West NA coastline and cold tongue off SA
 
-![](fi/p18_040.png)
+![](p18_040.png)
 
 **The PDO is on what time scale:**  
 Decadal ~ 20-30 year
@@ -761,7 +761,7 @@ Decadal ~ 20-30 year
 \- During the summer the MLD rises but the SST anomaly stays deep meaning it can’t exchange its energy  
 \- In winter the MLD plunges again and the SST can come back up to either be reinforced or lose its anomaly
 
-![](fi/p18_041.png)
+![](p18_041.png)
 
 **The PDO has a … effect on the ENSO climate regime:**  
 Modulating
@@ -787,9 +787,9 @@ Negative PNA with La Nina
 Positive PNA = High pressure and temp West NA, Low pressure and temp East NA  
 Negative PNA = Vice Versa
 
-![](fi/p19_042.png)
+![](p19_042.png)
 
-![](fi/p19_043.png)
+![](p19_043.png)
 
 **What other oscillation affect the PNA:**  
 PDO
@@ -798,9 +798,9 @@ PDO
 Waters off BC change air temp and make jet stream meander  
 Leading to +/- PNA
 
-![](fi/p19_045.png)
+![](p19_045.png)
 
-![](fi/p19_044.png)
+![](p19_044.png)
 
 **During the (+)PDO phase, what makes it so the south east is colder:**  
 Jet stream brings cold air down from high latitudes
@@ -818,7 +818,7 @@ Iceland and Azores
 (+) = Low pressure over arctic / High pressure in mid Atlantic  
 (-) = High pressure over arctic / Low pressure in mid Atlantic
 
-![](fi/p20_046.png)
+![](p20_046.png)
 
 **The concentration of low arctic pressure of the (+)NAO phase leads to:**  
 Strong polar vortex - colder
@@ -851,7 +851,7 @@ Variability of the eddy-driven jet
 **What kind of stratospheric polar vortex leads to (+)NAO:**  
 Strong northern polar jet stream
 
-![](fi/p20_047.png)
+![](p20_047.png)
 
 **Vortex splitting leads to what NAO phase:**  
 (-) Negative
@@ -874,7 +874,7 @@ More (+)NAO
 \- Med gets drought  
 \- North Europe gets warm
 
-![](fi/p21_048.png)
+![](p21_048.png)
 
 **What are the effects of a (-)NAO (4):**  
 \- Weak westerlies  
@@ -882,18 +882,18 @@ More (+)NAO
 \- North europe/asia get cold winter  
 \- Stormy med
 
-![](fi/p21_049.png)
+![](p21_049.png)
 
 **How are storms different in (+)NAO:**  
 Lots of strong storms that all follow a path  
 (the eddy driven jet stream path)
 
-![](fi/p21_050.png)
+![](p21_050.png)
 
 **What does AMO stand for:**  
 Atlantic Multi decadal Oscillation
 
-![](fi/p22_051.png)
+![](p22_051.png)
 
 **The AMO has what period:**  
 60-80 years
@@ -952,7 +952,7 @@ Atmospheric River that brings precip from Hawaii to Vancouver
 Jet stream splits around a high pressure system off west NA (Which itself was created by MJO)  
 Jet stream pulls precip from passing by MJO towards vancouver
 
-![](fi/p23_052.png)
+![](p23_052.png)
 
 **How is the Atlantic El Nino different from the ENSO (3):**  
 \- When in warm phase whole area warms (not warm in east, cold in west like ENSO)  
@@ -966,13 +966,13 @@ Jet stream pulls precip from passing by MJO towards vancouver
 **Why does the warm Atlantic Nino reduce monsoons:**  
 Makes the water hotter in the summer, decreasing water-land temp gradient
 
-![](fi/p23_053.png)
+![](p23_053.png)
 
 **What do the positive and negative Indian Nino look like:**  
 Positive = Hot + more convection off africa coast, cold in south east asia  
 Cold = Temperature are vice versa
 
-![](fi/p24_054.png)
+![](p24_054.png)
 
 **How is indian nino index different from the other ninos:**  
 Positive phase = trade winds intensify
@@ -1121,7 +1121,7 @@ Sand
 
 (Left = no lapse rate change so no normal condos, Right = lapse rate changed so its less hot)
 
-![](fi/p27_055.png)
+![](p27_055.png)
 
 **Why does the atmosphere heat more than the land at the tropics:**  
 High evaporation rate cools the surface and releases latent heat in the atmosphere
@@ -1155,9 +1155,9 @@ The TOA Flux is proportional to the change in temperature
 
 or
 
-![](fi/p27_057.png)
+![](p27_057.png)
 
-![](fi/p27_056.png)
+![](p27_056.png)
 
 **What is λin the equation above:**  
 Climate feedback parameter - Parametre retroactive climatique
@@ -1180,7 +1180,7 @@ Because there is a linear relationship with ΔTs
 \- Longwave (changes in emissivity)  
 \- Planck's feedback (negative feedback, warmer bodies radiate more)
 
-![](fi/p28_058.png)
+![](p28_058.png)
 
 **What is the standard measure of climate sensitivity:**  
 Double CO2
@@ -1194,7 +1194,7 @@ Around 4 W/m2
 **What value of temp change do models give us for a doubling of CO2:**  
 1.2 K
 
-![](fi/p28_059.png)
+![](p28_059.png)
 
 **The IPCC reports what warming range due to doubling CO2:**  
 1.5 to 4.5 K
@@ -1204,7 +1204,7 @@ Around 4 W/m2
 \- Non linear ECS / Feedback relationship - As feedbacks reach 0, a small change in feedback create large ECS change  
 \- General model uncertainty - not as important / interesting
 
-![](fi/p28_060.png)
+![](p28_060.png)
 
 **Why do climate models underestimate climate sensitivity:**  
 They only account for planck feedback and not albedo/emissivity changes  
@@ -1324,6 +1324,10 @@ Arctic
 
 **Does the ocean or land warm more:**  
 Land (1.5 °C vs 0.88 °C)
+
+![](image.png)
+
+![](image-1.png)
 
 **How has temp change in the troposphere and stratosphere:**  
 Tropo = Warming  

@@ -2,16 +2,16 @@
 """Build the flashcard viewer.
 
 Each course is a folder in the repo that holds one or more .md flashcard
-files and, optionally, an fi/ folder with the images they use:
+files, with the images they use sitting right beside them:
 
     HENVPaus/
         HENVPaus FlashCards.md
-        fi/p02_001.png
+        p02_001.png
     Another Course/
         ...
 
 Every course folder is embedded into a static page at ./_site/index.html,
-and each course's fi/ folder is copied to _site/<course>/fi/. The page
+and each course's images are copied to _site/<course>/. The page
 shows one tab per course. It parses the markdown itself, so the same code
 can also re-parse a file after you edit a card in the browser.
 
@@ -26,6 +26,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "_site"
 IMAGE_RE = re.compile(r"!\[[^\]]*\]\(([^)]+)\)")
+IMAGE_EXTS = {".png", ".jpg", ".jpeg", ".gif", ".webp", ".svg"}
 
 
 def find_courses():
@@ -67,8 +68,11 @@ def main():
         shutil.rmtree(OUT)
     OUT.mkdir(parents=True)
     for folder in courses:
-        if (folder / "fi").exists():
-            shutil.copytree(folder / "fi", OUT / folder.name / "fi")
+        dest = OUT / folder.name
+        dest.mkdir()
+        for img in folder.iterdir():
+            if img.suffix.lower() in IMAGE_EXTS:
+                shutil.copy2(img, dest / img.name)
 
     template = (ROOT / "viewer" / "template.html").read_text(encoding="utf-8")
     # Escape "</" so the card text can never close the <script> tag early.

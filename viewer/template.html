@@ -141,7 +141,6 @@
   }
   footer .group { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
   .keys { color: var(--muted); font-size: .8rem; }
-  input[type="file"] { display: none; }
 
   #toast {
     position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom));
@@ -198,9 +197,6 @@
 
 <footer>
   <div class="group">
-    <button id="exportBtn">Export marks</button>
-    <button id="importBtn">Import marks</button>
-    <input type="file" id="importFile" accept="application/json,.json">
     <button id="clearBtn">Clear marks</button>
   </div>
   <span class="keys">Keys: ← → navigate · ↑ mark · ↓ flip</span>
@@ -358,9 +354,6 @@
     next: document.getElementById("next"),
     flip: document.getElementById("flip"),
     themeBtn: document.getElementById("themeBtn"),
-    exportBtn: document.getElementById("exportBtn"),
-    importBtn: document.getElementById("importBtn"),
-    importFile: document.getElementById("importFile"),
     clearBtn: document.getElementById("clearBtn"),
     toast: document.getElementById("toast"),
   };
@@ -575,46 +568,6 @@
     render();
   }
 
-  function exportMarks() {
-    const data = {
-      app: "flashcards",
-      version: 1,
-      exported: new Date().toISOString(),
-      marked: [...marks].sort(),
-    };
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "flashcard-marks-" + new Date().toISOString().slice(0, 10) + ".json";
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
-    toast("Exported " + marks.size + " marks");
-  }
-
-  // Import MERGES with the marks already on this device.
-  function importMarks(file) {
-    const reader = new FileReader();
-    reader.onload = function () {
-      try {
-        const data = JSON.parse(reader.result);
-        const list = Array.isArray(data) ? data : data.marked;
-        if (!Array.isArray(list)) throw new Error("no marks list");
-        const before = marks.size;
-        list.forEach(function (id) { if (typeof id === "string") marks.add(id); });
-        saveMarks();
-        rebuildOrder(currentCard() && currentCard().id, index);
-        render();
-        toast("Imported " + list.length + " marks (" + (marks.size - before) + " new)");
-      } catch (e) {
-        toast("That file isn't a valid marks export");
-      }
-    };
-    reader.readAsText(file);
-  }
-
   // ---------- events ----------
   let swiped = false;
   el.card.addEventListener("click", function () {
@@ -633,12 +586,6 @@
   el.markedOnly.addEventListener("change", function () { rebuildOrder(); render(); });
   el.shuffle.addEventListener("change", function () { rebuildOrder(); render(); });
 
-  el.exportBtn.addEventListener("click", exportMarks);
-  el.importBtn.addEventListener("click", function () { el.importFile.click(); });
-  el.importFile.addEventListener("change", function () {
-    if (el.importFile.files[0]) importMarks(el.importFile.files[0]);
-    el.importFile.value = "";
-  });
   el.clearBtn.addEventListener("click", function () {
     if (!marks.size) { toast("No marks to clear"); return; }
     if (!confirm("Remove all " + marks.size + " marks from this device?")) return;
