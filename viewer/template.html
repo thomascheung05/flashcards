@@ -14,6 +14,7 @@
     --text: #1c1917;
     --muted: #78716c;
     --accent: #2563eb;
+    --danger: #dc2626;
     --mark: #f59e0b;
     --border: #d6d3d1;
     --radius: 14px;
@@ -25,6 +26,7 @@
       --text: #f5f5f4;
       --muted: #a8a29e;
       --accent: #60a5fa;
+      --danger: #f87171;
       --mark: #fbbf24;
       --border: #44403c;
     }
@@ -35,6 +37,7 @@
     --text: #f5f5f4;
     --muted: #a8a29e;
     --accent: #60a5fa;
+    --danger: #f87171;
     --mark: #fbbf24;
     --border: #44403c;
   }
@@ -53,7 +56,7 @@
     min-height: 100dvh;
     padding: env(safe-area-inset-top) 16px env(safe-area-inset-bottom);
   }
-  button, select, input { font: inherit; color: inherit; }
+  button, select, input, textarea { font: inherit; color: inherit; }
   button {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -62,9 +65,13 @@
     cursor: pointer;
     min-height: 44px;
   }
-  button:hover { border-color: var(--accent); }
-  button:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  button:hover:not(:disabled) { border-color: var(--accent); }
+  button:disabled { opacity: .5; cursor: default; }
+  button:focus-visible, select:focus-visible, textarea:focus-visible, input:focus-visible {
+    outline: 2px solid var(--accent); outline-offset: 2px;
+  }
   button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  button.danger { color: var(--danger); }
   button.marked { border-color: var(--mark); color: var(--mark); font-weight: 600; }
 
   header {
@@ -74,10 +81,11 @@
   header h1 { font-size: 1.1rem; margin: 0; }
   .progress { color: var(--muted); font-variant-numeric: tabular-nums; }
   .controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
-  select {
+  select, input[type="text"], input[type="password"], textarea {
     background: var(--surface); border: 1px solid var(--border);
-    border-radius: 10px; padding: 10px; min-height: 44px; max-width: 100%;
+    border-radius: 10px; padding: 10px; max-width: 100%;
   }
+  select { min-height: 44px; }
   label.toggle { display: inline-flex; gap: 6px; align-items: center; min-height: 44px; }
 
   main { flex: 1; display: flex; flex-direction: column; min-height: 0; }
@@ -96,12 +104,12 @@
     box-shadow: 0 1px 3px rgba(0,0,0,.06);
   }
   .card.is-marked { border-color: var(--mark); box-shadow: 0 0 0 2px var(--mark) inset; }
-  .meta { color: var(--muted); font-size: .85rem; margin-bottom: 12px; }
+  .meta { color: var(--muted); font-size: .85rem; margin-bottom: 12px; padding-right: 30px; }
   .side-label {
     color: var(--muted); font-size: .75rem; text-transform: uppercase;
     letter-spacing: .08em; margin-bottom: 8px;
   }
-  .face-text { font-size: 1.25rem; white-space: normal; overflow-wrap: anywhere; }
+  .face-text { font-size: 1.25rem; overflow-wrap: anywhere; }
   .answer-line { margin: 0 0 .4em; }
   .answer-line.sub { padding-left: 1em; }
   .hint { margin-top: auto; padding-top: 16px; color: var(--muted); font-size: .85rem; }
@@ -118,6 +126,7 @@
 
   .nav { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin: 14px 0; }
   .nav button { font-size: 1.05rem; }
+  .mid { text-align: center; }
 
   footer {
     border-top: 1px solid var(--border); padding: 14px 0 20px; margin-top: 8px;
@@ -125,11 +134,31 @@
   }
   footer .group { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
   .keys { color: var(--muted); font-size: .8rem; }
+
+  /* dialogs */
+  dialog {
+    background: var(--surface); color: var(--text);
+    border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 20px; width: min(560px, 94vw); max-height: 90vh;
+  }
+  dialog::backdrop { background: rgba(0,0,0,.4); }
+  dialog h2 { font-size: 1.1rem; margin: 0 0 8px; }
+  dialog p { margin: 6px 0 12px; color: var(--muted); font-size: .9rem; }
+  dialog label { display: block; font-size: .85rem; color: var(--muted); margin-top: 10px; }
+  dialog input, dialog textarea { width: 100%; margin-top: 4px; }
+  textarea.raw {
+    width: 100%; min-height: 240px; font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: .95rem; line-height: 1.45; resize: vertical;
+  }
+  .dialog-actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end; margin-top: 16px; }
+  .dialog-actions .spacer { flex: 1; }
+  .error { color: var(--danger); font-size: .9rem; margin: 8px 0 0; min-height: 1em; }
+
   #toast {
     position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom));
     transform: translateX(-50%); background: var(--text); color: var(--bg);
     padding: 10px 16px; border-radius: 10px; opacity: 0; transition: opacity .2s;
-    pointer-events: none; max-width: 90vw; text-align: center;
+    pointer-events: none; max-width: 90vw; text-align: center; z-index: 10;
   }
   #toast.show { opacity: 1; }
   input[type="file"] { display: none; }
@@ -160,28 +189,66 @@
     <div class="meta" id="meta"></div>
     <div class="side-label" id="sideLabel">Question</div>
     <div class="face-text" id="faceText"></div>
-    <div class="hint" id="hint">Tap the card or press Space to reveal the answer</div>
+    <div class="hint" id="hint"></div>
   </div>
 
   <div class="nav">
     <button id="prev" aria-label="Previous card">← Prev</button>
-    <button id="flip" class="primary">Flip</button>
+    <button id="flip" class="primary">Show answer</button>
     <button id="next" aria-label="Next card">Next →</button>
   </div>
-  <div style="text-align:center">
+  <div class="mid">
     <button id="markBtn">★ Mark as difficult</button>
   </div>
 </main>
 
 <footer>
   <div class="group">
+    <button id="editBtn">✎ Edit card</button>
+    <button id="addBtn">+ Add card</button>
     <button id="exportBtn">Export marks</button>
     <button id="importBtn">Import marks</button>
     <input type="file" id="importFile" accept="application/json,.json">
     <button id="clearBtn">Clear marks</button>
+    <button id="settingsBtn">Settings</button>
   </div>
   <span class="keys">Keys: ← → navigate · Space flip · M mark</span>
 </footer>
+
+<!-- Card editor -->
+<dialog id="editor" aria-labelledby="editorTitle">
+  <h2 id="editorTitle">Edit card</h2>
+  <p>The first line is the question, wrapped in <code>**double asterisks:**</code>. The lines after it are the answer. Lines like <code>![](fi/name.png)</code> show an image.</p>
+  <textarea class="raw" id="editText" spellcheck="true"></textarea>
+  <div class="error" id="editError" role="alert"></div>
+  <div class="dialog-actions">
+    <button id="deleteCard" class="danger">Delete card</button>
+    <span class="spacer"></span>
+    <button id="cancelEdit">Cancel</button>
+    <button id="saveEdit" class="primary">Save to GitHub</button>
+  </div>
+</dialog>
+
+<!-- Settings -->
+<dialog id="settings" aria-labelledby="settingsTitle">
+  <h2 id="settingsTitle">Settings</h2>
+  <p>Editing saves your changes to the GitHub repo through the GitHub API. To allow that, create a <strong>fine-grained personal access token</strong> at GitHub → Settings → Developer settings → Fine-grained tokens. Limit it to this repository and give it <em>Contents: Read and write</em>. The token is stored only in this browser.</p>
+  <label for="setToken">Token</label>
+  <input type="password" id="setToken" autocomplete="off" placeholder="github_pat_…">
+  <label for="setOwner">Repo owner (leave blank to detect from the URL)</label>
+  <input type="text" id="setOwner" autocomplete="off">
+  <label for="setRepo">Repo name (leave blank to detect from the URL)</label>
+  <input type="text" id="setRepo" autocomplete="off">
+  <label for="setBranch">Branch</label>
+  <input type="text" id="setBranch" autocomplete="off" value="main">
+  <div class="error" id="settingsError" role="alert"></div>
+  <div class="dialog-actions">
+    <button id="forgetToken" class="danger">Forget token</button>
+    <span class="spacer"></span>
+    <button id="cancelSettings">Cancel</button>
+    <button id="saveSettings" class="primary">Save</button>
+  </div>
+</dialog>
 
 <div id="toast" role="status" aria-live="polite"></div>
 
@@ -189,30 +256,156 @@
 (function () {
   "use strict";
 
-  // Filled in by build.py.
-  const ALL_CARDS = /*__CARDS__*/[];
+  // Filled in by build.py: the markdown files as they were at build time.
+  const SOURCES = /*__SOURCES__*/[];
 
-  const STORAGE_KEY = "flashcards:marks:v1";
+  const MARKS_KEY = "flashcards:marks:v1";
+  const SETTINGS_KEY = "flashcards:settings:v1";
 
-  // ---------- marks (persisted per browser; storage can be unavailable) ----------
+  const LECTURE_RE = /^##\s+(.+?)\s*:?\s*$/;
+  const TOPIC_RE = /^###\s+(.+?)\s*$/;
+  const QUESTION_RE = /^\*\*(.+?):\*\*\s*$/;
+  const IMAGE_RE = /!\[[^\]]*\]\(([^)]+)\)/;
+
+  // ---------- parsing (same rules for every file) ----------
+  function unescapeMd(s) {
+    return s.replace(/\\(.)/g, "$1");
+  }
+
+  // Returns the cards in one markdown file. `qLine` and `end` are line
+  // indexes into the file, so an edit can splice the exact lines back in.
+  function parseSource(file, text) {
+    const lines = text.split("\n");
+    const cards = [];
+    let lecture = "", topic = "", cur = null;
+
+    function close(i) {
+      if (!cur) return;
+      cur.end = i;
+      const body = lines.slice(cur.qLine, i);
+      while (body.length && body[body.length - 1].trim() === "") body.pop();
+      cur.raw = body.join("\n");
+      cards.push(cur);
+      cur = null;
+    }
+
+    lines.forEach(function (rawLine, i) {
+      const line = rawLine.trim();
+      let m;
+      if (!line.startsWith("###") && (m = line.match(LECTURE_RE))) {
+        close(i); lecture = m[1]; topic = ""; return;
+      }
+      if ((m = line.match(TOPIC_RE))) {
+        close(i); topic = m[1]; return;
+      }
+      if ((m = line.match(QUESTION_RE))) {
+        close(i);
+        cur = { file: file, qLine: i, question: unescapeMd(m[1]), lecture: lecture,
+                topic: topic, answer: [], images: [] };
+        return;
+      }
+      if (!cur || !line) return;
+      const im = line.match(IMAGE_RE);
+      if (im) { cur.images.push(im[1]); return; }
+      cur.answer.push(unescapeMd(line));
+    });
+    close(lines.length);
+    return cards;
+  }
+
+  // SHA-1 of a UTF-8 string, as hex. Used so card ids match the ids that
+  // marks were saved under before this version (the build used Python's hashlib).
+  function sha1Hex(str) {
+    const bytes = new TextEncoder().encode(str);
+    const bitLen = bytes.length * 8;
+    const padded = new Uint8Array(((bytes.length + 9 + 63) >> 6) << 6);
+    padded.set(bytes);
+    padded[bytes.length] = 0x80;
+    const dv = new DataView(padded.buffer);
+    dv.setUint32(padded.length - 4, bitLen >>> 0);
+    dv.setUint32(padded.length - 8, Math.floor(bitLen / 0x100000000));
+
+    let h0 = 0x67452301, h1 = 0xEFCDAB89, h2 = 0x98BADCFE, h3 = 0x10325476, h4 = 0xC3D2E1F0;
+    const w = new Uint32Array(80);
+    for (let off = 0; off < padded.length; off += 64) {
+      for (let i = 0; i < 16; i++) w[i] = dv.getUint32(off + i * 4);
+      for (let i = 16; i < 80; i++) {
+        const x = w[i - 3] ^ w[i - 8] ^ w[i - 14] ^ w[i - 16];
+        w[i] = (x << 1) | (x >>> 31);
+      }
+      let a = h0, b = h1, c = h2, d = h3, e = h4;
+      for (let i = 0; i < 80; i++) {
+        let f, k;
+        if (i < 20) { f = (b & c) | (~b & d); k = 0x5A827999; }
+        else if (i < 40) { f = b ^ c ^ d; k = 0x6ED9EBA1; }
+        else if (i < 60) { f = (b & c) | (b & d) | (c & d); k = 0x8F1BBCDC; }
+        else { f = b ^ c ^ d; k = 0xCA62C1D6; }
+        const t = (((a << 5) | (a >>> 27)) + f + e + k + w[i]) >>> 0;
+        e = d; d = c; c = ((b << 30) | (b >>> 2)) >>> 0; b = a; a = t;
+      }
+      h0 = (h0 + a) >>> 0; h1 = (h1 + b) >>> 0; h2 = (h2 + c) >>> 0;
+      h3 = (h3 + d) >>> 0; h4 = (h4 + e) >>> 0;
+    }
+    return [h0, h1, h2, h3, h4].map(function (x) { return x.toString(16).padStart(8, "0"); }).join("");
+  }
+
+  // Parse every file and give each card a stable id: hash of its question
+  // plus how many times that question has appeared so far.
+  function buildCards(srcs) {
+    const all = [];
+    srcs.forEach(function (s) { all.push.apply(all, parseSource(s.file, s.text)); });
+    const seen = new Map();
+    all.forEach(function (c) {
+      const n = (seen.get(c.question) || 0) + 1;
+      seen.set(c.question, n);
+      c.id = sha1Hex(c.question + "|" + n).slice(0, 12);
+    });
+    return all;
+  }
+
+  // ---------- state ----------
+  let sources = SOURCES.map(function (s) { return { file: s.file, text: s.text }; });
+  let cards = buildCards(sources);
+  let order = [];      // cards currently in play, in display order
+  let index = 0;       // position within `order`
+  let flipped = false; // showing the answer side?
+  let busy = false;
+
+  // ---------- storage (can be unavailable in private windows) ----------
   function loadMarks() {
     try {
-      const raw = localStorage.getItem(STORAGE_KEY);
+      const raw = localStorage.getItem(MARKS_KEY);
       return new Set(raw ? JSON.parse(raw) : []);
-    } catch (e) {
-      return new Set();
-    }
+    } catch (e) { return new Set(); }
   }
   function saveMarks() {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify([...marks]));
-    } catch (e) {
-      toast("Couldn't save marks in this browser");
-    }
+    try { localStorage.setItem(MARKS_KEY, JSON.stringify([...marks])); }
+    catch (e) { toast("Couldn't save marks in this browser"); }
   }
   const marks = loadMarks();
 
-  // ---------- state ----------
+  function getSettings() {
+    try { return JSON.parse(localStorage.getItem(SETTINGS_KEY) || "{}") || {}; }
+    catch (e) { return {}; }
+  }
+  function putSettings(s) {
+    try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(s)); return true; }
+    catch (e) { return false; }
+  }
+  // Owner and repo come from the URL (<owner>.github.io/<repo>/) unless set in Settings.
+  function repoInfo() {
+    const s = getSettings();
+    let owner = s.owner || "", repo = s.repo || "";
+    const host = location.hostname.match(/^([a-z0-9-]+)\.github\.io$/i);
+    const seg = location.pathname.split("/").filter(Boolean)[0];
+    if (host && seg) {
+      owner = owner || host[1];
+      repo = repo || seg;
+    }
+    return { owner: owner, repo: repo, branch: s.branch || "main", token: s.token || "" };
+  }
+
+  // ---------- DOM refs ----------
   const el = {
     lecture: document.getElementById("lecture"),
     markedOnly: document.getElementById("markedOnly"),
@@ -227,35 +420,48 @@
     prev: document.getElementById("prev"),
     next: document.getElementById("next"),
     flip: document.getElementById("flip"),
+    editBtn: document.getElementById("editBtn"),
+    addBtn: document.getElementById("addBtn"),
     exportBtn: document.getElementById("exportBtn"),
     importBtn: document.getElementById("importBtn"),
     importFile: document.getElementById("importFile"),
     clearBtn: document.getElementById("clearBtn"),
+    settingsBtn: document.getElementById("settingsBtn"),
     toast: document.getElementById("toast"),
+    editor: document.getElementById("editor"),
+    editTitle: document.getElementById("editorTitle"),
+    editText: document.getElementById("editText"),
+    editError: document.getElementById("editError"),
+    deleteCard: document.getElementById("deleteCard"),
+    saveEdit: document.getElementById("saveEdit"),
+    cancelEdit: document.getElementById("cancelEdit"),
+    settings: document.getElementById("settings"),
+    setToken: document.getElementById("setToken"),
+    setOwner: document.getElementById("setOwner"),
+    setRepo: document.getElementById("setRepo"),
+    setBranch: document.getElementById("setBranch"),
+    settingsError: document.getElementById("settingsError"),
+    forgetToken: document.getElementById("forgetToken"),
+    saveSettings: document.getElementById("saveSettings"),
+    cancelSettings: document.getElementById("cancelSettings"),
   };
 
-  let order = [];      // cards currently in play, in display order
-  let index = 0;       // position within `order`
-  let flipped = false; // showing the answer side?
-
   // ---------- helpers ----------
-  function el_(tag, cls, text) {
+  function elem(tag, cls, text) {
     const node = document.createElement(tag);
     if (cls) node.className = cls;
     if (text !== undefined) node.textContent = text;
     return node;
   }
 
-  // Render answer lines with **bold** support, without using innerHTML.
+  // Answer lines with **bold** support. Built with DOM calls, never innerHTML.
   function renderAnswer(container, lines) {
     container.textContent = "";
     lines.forEach(function (line) {
-      const indented = /^\s/.test(line);
-      const p = el_("p", "answer-line" + (indented ? " sub" : ""));
-      const parts = line.split(/\*\*(.+?)\*\*/);
-      parts.forEach(function (part, i) {
+      const p = elem("p", "answer-line" + (/^\s/.test(line) ? " sub" : ""));
+      line.split(/\*\*(.+?)\*\*/).forEach(function (part, i) {
         if (!part) return;
-        p.appendChild(i % 2 === 1 ? el_("strong", null, part) : document.createTextNode(part));
+        p.appendChild(i % 2 === 1 ? elem("strong", null, part) : document.createTextNode(part));
       });
       container.appendChild(p);
     });
@@ -265,7 +471,7 @@
     el.toast.textContent = msg;
     el.toast.classList.add("show");
     clearTimeout(toast._t);
-    toast._t = setTimeout(function () { el.toast.classList.remove("show"); }, 2200);
+    toast._t = setTimeout(function () { el.toast.classList.remove("show"); }, 2600);
   }
 
   function shuffleArray(arr) {
@@ -276,32 +482,34 @@
     return arr;
   }
 
-  // ---------- building the deck in play ----------
-  function rebuildOrder(keepCardId) {
-    let list = ALL_CARDS.slice();
+  function currentCard() { return order[index] || null; }
+
+  // ---------- deck in play ----------
+  function rebuildOrder(keepId, fallbackIndex) {
+    let list = cards.slice();
     const lec = el.lecture.value;
     if (lec !== "") list = list.filter(function (c) { return c.lecture === lec; });
     if (el.markedOnly.checked) list = list.filter(function (c) { return marks.has(c.id); });
     if (el.shuffle.checked) shuffleArray(list);
     order = list;
 
-    // Keep the same card selected if it is still in the list.
-    const keep = keepCardId ? order.findIndex(function (c) { return c.id === keepCardId; }) : -1;
-    index = keep >= 0 ? keep : 0;
+    const keep = keepId ? order.findIndex(function (c) { return c.id === keepId; }) : -1;
+    const fallback = Math.min(Math.max(fallbackIndex || 0, 0), Math.max(order.length - 1, 0));
+    index = keep >= 0 ? keep : fallback;
     flipped = false;
   }
 
   function populateLectures() {
+    const previous = el.lecture.value;
     const lectures = [];
-    ALL_CARDS.forEach(function (c) {
-      if (lectures.indexOf(c.lecture) === -1) lectures.push(c.lecture);
-    });
+    cards.forEach(function (c) { if (lectures.indexOf(c.lecture) === -1) lectures.push(c.lecture); });
     el.lecture.textContent = "";
-    el.lecture.appendChild(new Option("All lectures (" + ALL_CARDS.length + ")", ""));
+    el.lecture.appendChild(new Option("All lectures (" + cards.length + ")", ""));
     lectures.forEach(function (lec) {
-      const count = ALL_CARDS.filter(function (c) { return c.lecture === lec; }).length;
+      const count = cards.filter(function (c) { return c.lecture === lec; }).length;
       el.lecture.appendChild(new Option((lec || "Unsorted") + " (" + count + ")", lec));
     });
+    el.lecture.value = lectures.indexOf(previous) !== -1 || previous === "" ? previous : "";
   }
 
   // ---------- rendering ----------
@@ -310,6 +518,7 @@
       ? (index + 1) + " / " + order.length + " · ★ " + marks.size + " marked"
       : "★ " + marks.size + " marked";
 
+    el.editBtn.disabled = el.addBtn.disabled = busy;
     if (!order.length) {
       el.meta.textContent = "";
       el.sideLabel.textContent = "";
@@ -319,16 +528,17 @@
       el.hint.textContent = "";
       el.card.classList.remove("is-marked");
       el.card.style.cursor = "default";
-      el.markBtn.disabled = true;
+      el.markBtn.disabled = el.editBtn.disabled = true;
       el.prev.disabled = el.next.disabled = el.flip.disabled = true;
       return;
     }
 
     el.prev.disabled = el.next.disabled = el.flip.disabled = false;
     el.markBtn.disabled = false;
+    el.editBtn.disabled = busy;
     el.card.style.cursor = "pointer";
 
-    const card = order[index];
+    const card = currentCard();
     const isMarked = marks.has(card.id);
     el.card.classList.toggle("is-marked", isMarked);
     el.markBtn.textContent = isMarked ? "★ Marked (unmark)" : "★ Mark as difficult";
@@ -337,10 +547,8 @@
     el.meta.textContent = [card.lecture, card.topic].filter(Boolean).join(" · ");
     el.flip.textContent = flipped ? "Show question" : "Show answer";
 
-    // Clear the card body, then fill the active side.
     el.faceText.textContent = "";
-    const old = el.card.querySelectorAll("img");
-    old.forEach(function (img) { img.remove(); });
+    el.card.querySelectorAll("img").forEach(function (img) { img.remove(); });
 
     if (!flipped) {
       el.sideLabel.textContent = "Question";
@@ -360,7 +568,7 @@
     }
   }
 
-  // ---------- actions ----------
+  // ---------- study actions ----------
   function go(delta) {
     if (!order.length) return;
     index = (index + delta + order.length) % order.length;
@@ -373,20 +581,13 @@
     render();
   }
   function toggleMark() {
-    if (!order.length) return;
-    const card = order[index];
-    if (marks.has(card.id)) {
-      marks.delete(card.id);
-    } else {
-      marks.add(card.id);
-    }
+    const card = currentCard();
+    if (!card) return;
+    if (marks.has(card.id)) marks.delete(card.id); else marks.add(card.id);
     saveMarks();
     if (el.markedOnly.checked) {
-      // The card may have just left the list; rebuild and stay close to it.
-      const stayAt = index;
-      rebuildOrder(marks.has(card.id) ? card.id : null);
-      if (!marks.has(card.id) && order.length) index = Math.min(stayAt, order.length - 1);
-      flipped = false;
+      // The card may have just left the list; keep the position stable.
+      rebuildOrder(marks.has(card.id) ? card.id : null, index);
     }
     render();
   }
@@ -411,8 +612,6 @@
   }
 
   // Import MERGES with the marks already on this device.
-  // Marks removed on one device are not removed on the other; use
-  // "Clear marks" first on the device if you want a clean start.
   function importMarks(file) {
     const reader = new FileReader();
     reader.onload = function () {
@@ -423,10 +622,9 @@
         const before = marks.size;
         list.forEach(function (id) { if (typeof id === "string") marks.add(id); });
         saveMarks();
-        const added = marks.size - before;
-        rebuildOrder(order.length ? order[index].id : null);
+        rebuildOrder(currentCard() && currentCard().id, index);
         render();
-        toast("Imported " + list.length + " marks (" + added + " new)");
+        toast("Imported " + list.length + " marks (" + (marks.size - before) + " new)");
       } catch (e) {
         toast("That file isn't a valid marks export");
       }
@@ -434,7 +632,279 @@
     reader.readAsText(file);
   }
 
+  // ---------- GitHub API ----------
+  function b64Encode(text) {
+    const bytes = new TextEncoder().encode(text);
+    let bin = "";
+    bytes.forEach(function (b) { bin += String.fromCharCode(b); });
+    return btoa(bin);
+  }
+  function b64Decode(b64) {
+    const bin = atob(b64.replace(/\s+/g, ""));
+    const bytes = Uint8Array.from(bin, function (c) { return c.charCodeAt(0); });
+    return new TextDecoder("utf-8").decode(bytes);
+  }
+
+  async function ghRequest(info, method, file, body) {
+    const url = "https://api.github.com/repos/" + encodeURIComponent(info.owner) + "/" +
+      encodeURIComponent(info.repo) + "/contents/" +
+      file.split("/").map(encodeURIComponent).join("/") +
+      (method === "GET" ? "?ref=" + encodeURIComponent(info.branch) : "");
+    const headers = {
+      "Accept": "application/vnd.github+json",
+      "Authorization": "Bearer " + info.token,
+      "X-GitHub-Api-Version": "2022-11-28",
+    };
+    if (body) headers["Content-Type"] = "application/json";
+    const res = await fetch(url, { method: method, headers: headers, body: body ? JSON.stringify(body) : undefined });
+    if (!res.ok) {
+      let detail = "";
+      try { detail = (await res.json()).message || ""; } catch (e) { /* no JSON body */ }
+      const err = new Error(friendlyError(res.status, detail));
+      err.status = res.status;
+      throw err;
+    }
+    return res.json();
+  }
+
+  function friendlyError(status, detail) {
+    if (status === 409) return "The file changed on GitHub since this page loaded. Reload and try again.";
+    if (status === 401 || status === 403) return "GitHub refused the request. Check the token and its permissions in Settings. (" + detail + ")";
+    if (status === 404) return "Repo or file not found. Check the owner, repo and branch in Settings.";
+    return "GitHub error " + status + (detail ? ": " + detail : "");
+  }
+
+  // Replace the local copy with the latest version from GitHub, if a token is set.
+  async function loadLatest() {
+    const info = repoInfo();
+    if (!info.token || !info.owner || !info.repo) return;
+    try {
+      const fresh = [];
+      for (const s of sources) {
+        const json = await ghRequest(info, "GET", s.file);
+        fresh.push({ file: s.file, text: b64Decode(json.content) });
+      }
+      sources = fresh;
+      cards = buildCards(sources);
+      populateLectures();
+      rebuildOrder(currentCard() && currentCard().id, index);
+      render();
+    } catch (e) {
+      toast("Showing the published version (" + e.message + ")");
+    }
+  }
+
+  // ---------- editing ----------
+  function normaliseBlock(text) {
+    // Keep trailing spaces inside lines: two spaces at the end of a line are a markdown line break.
+    const lines = text.split("\n");
+    while (lines.length && lines[0].trim() === "") lines.shift();
+    while (lines.length && lines[lines.length - 1] === "") lines.pop();
+    return lines;
+  }
+
+  // Works out the new file text for one change. `lines` is the fresh file.
+  function planChange(kind, lines, target, newLines) {
+    if (kind === "edit") {
+      const end = target.end;
+      const trailing = lines.slice(target.qLine, end).reverse().findIndex(function (l) { return l.trim() !== ""; });
+      // Keep the same number of blank lines after the card as the file had.
+      const blanks = trailing === -1 ? end - target.qLine : trailing;
+      return {
+        text: lines.slice(0, target.qLine).concat(newLines, Array(blanks).fill(""), lines.slice(end)),
+        focusLine: target.qLine,
+      };
+    }
+    if (kind === "delete") {
+      return {
+        text: lines.slice(0, target.qLine).concat(lines.slice(target.end)),
+        focusLine: target.qLine,
+      };
+    }
+    // add
+    if (target) {
+      const at = target.end;
+      return {
+        text: lines.slice(0, at).concat(newLines, [""], lines.slice(at)),
+        focusLine: at,
+      };
+    }
+    const base = lines.slice();
+    while (base.length && base[base.length - 1].trim() === "") base.pop();
+    const start = base.length ? base.length + 1 : 0;
+    return {
+      text: (base.length ? base.concat([""]) : []).concat(newLines, [""]),
+      focusLine: start,
+    };
+  }
+
+  // Reads the file fresh from GitHub, applies the change, and commits it.
+  async function commitChange(opts) {
+    const info = repoInfo();
+    if (!info.token) throw new Error("Add a GitHub token in Settings first.");
+    if (!info.owner || !info.repo) throw new Error("Set the repo owner and name in Settings.");
+
+    const json = await ghRequest(info, "GET", opts.file);
+    const freshText = b64Decode(json.content);
+    const freshSources = sources.map(function (s) {
+      return s.file === opts.file ? { file: s.file, text: freshText } : s;
+    });
+    const freshCards = buildCards(freshSources);
+
+    let target = null;
+    if (opts.targetId) {
+      target = freshCards.find(function (c) { return c.id === opts.targetId; });
+      if (!target) throw new Error("That card changed on GitHub. Reload the page and try again.");
+    }
+
+    const lines = freshText.split("\n");
+    const newLines = opts.newLines || [];
+    const plan = planChange(opts.kind, lines, target, newLines);
+    const newText = plan.text.join("\n");
+    if (newText === freshText) throw new Error("Nothing changed.");
+
+    await ghRequest(info, "PUT", opts.file, {
+      message: opts.message,
+      content: b64Encode(newText),
+      sha: json.sha,
+      branch: info.branch,
+    });
+
+    sources = freshSources.map(function (s) {
+      return s.file === opts.file ? { file: s.file, text: newText } : s;
+    });
+    cards = buildCards(sources);
+
+    // Keep marks attached to the right card.
+    if (opts.kind === "delete") {
+      marks.delete(target.id);
+    } else if (opts.kind === "edit") {
+      const now = cards.find(function (c) { return c.file === opts.file && c.qLine === plan.focusLine; });
+      if (now && now.id !== target.id && marks.has(target.id)) {
+        marks.delete(target.id);
+        marks.add(now.id);
+      }
+    }
+    saveMarks();
+
+    populateLectures();
+    const focus = cards.find(function (c) { return c.file === opts.file && c.qLine === plan.focusLine; });
+    return focus ? focus.id : null;
+  }
+
+  function openEditor(kind) {
+    const card = currentCard();
+    const file = card ? card.file : (sources[0] && sources[0].file);
+    if (!file) { toast("No markdown file to add cards to"); return; }
+    el.editError.textContent = "";
+    el.editor.dataset.kind = kind;
+    el.editor.dataset.file = file;
+    el.editor.dataset.targetId = kind === "edit" && card ? card.id : "";
+    el.editor.dataset.afterId = kind === "add" && card ? card.id : "";
+    if (kind === "edit" && card) {
+      el.editTitle.textContent = "Edit card";
+      el.editText.value = card.raw;
+      el.deleteCard.hidden = false;
+    } else {
+      el.editTitle.textContent = "New card";
+      el.editText.value = "**New question:**\nAnswer goes here";
+      el.deleteCard.hidden = true;
+    }
+    el.editor.showModal();
+    el.editText.focus();
+    el.editText.setSelectionRange(0, 0);
+  }
+
+  function setBusy(on) {
+    busy = on;
+    [el.saveEdit, el.deleteCard, el.cancelEdit, el.editBtn, el.addBtn].forEach(function (b) { b.disabled = on; });
+    render();
+  }
+
+  async function runChange(kind, extra) {
+    const opts = Object.assign({ kind: kind, file: el.editor.dataset.file }, extra);
+    setBusy(true);
+    try {
+      const focusId = await commitChange(opts);
+      el.editor.close();
+      rebuildOrder(focusId, index);
+      toast(opts.message);
+    } catch (e) {
+      if (el.editor.open) el.editError.textContent = e.message;
+      else toast(e.message);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  el.saveEdit.addEventListener("click", function () {
+    const newLines = normaliseBlock(el.editText.value);
+    if (!newLines.length || !QUESTION_RE.test(newLines[0].trim())) {
+      el.editError.textContent = "The first line must be the question, like **What is X:**";
+      return;
+    }
+    const question = unescapeMd(newLines[0].trim().match(QUESTION_RE)[1]);
+    const kind = el.editor.dataset.kind;
+    if (!repoInfo().token) { el.editor.close(); openSettings(); return; }
+    if (kind === "edit") {
+      runChange("edit", { targetId: el.editor.dataset.targetId, newLines: newLines,
+        message: "Edit flashcard: " + question });
+    } else {
+      runChange("add", { targetId: el.editor.dataset.afterId || null, newLines: newLines,
+        message: "Add flashcard: " + question });
+    }
+  });
+
+  el.deleteCard.addEventListener("click", function () {
+    const card = currentCard();
+    if (!card || !confirm("Delete this card from the repo? This can be undone in git history.")) return;
+    runChange("delete", { targetId: el.editor.dataset.targetId,
+      message: "Delete flashcard: " + card.question });
+  });
+
+  el.cancelEdit.addEventListener("click", function () { el.editor.close(); });
+
+  function requireToken(then) {
+    if (repoInfo().token) { then(); return; }
+    toast("Add a GitHub token in Settings to edit cards");
+    openSettings();
+  }
+
+  // ---------- settings ----------
+  function openSettings() {
+    const s = getSettings();
+    el.setToken.value = s.token || "";
+    el.setOwner.value = s.owner || "";
+    el.setRepo.value = s.repo || "";
+    el.setBranch.value = s.branch || "main";
+    el.settingsError.textContent = "";
+    el.settings.showModal();
+  }
+
+  el.saveSettings.addEventListener("click", function () {
+    const s = {
+      token: el.setToken.value.trim(),
+      owner: el.setOwner.value.trim(),
+      repo: el.setRepo.value.trim(),
+      branch: el.setBranch.value.trim() || "main",
+    };
+    if (!putSettings(s)) {
+      el.settingsError.textContent = "This browser won't let the page save settings.";
+      return;
+    }
+    el.settings.close();
+    toast("Settings saved");
+    loadLatest();
+  });
+  el.forgetToken.addEventListener("click", function () {
+    putSettings({});
+    el.settings.close();
+    toast("Token removed from this browser");
+  });
+  el.cancelSettings.addEventListener("click", function () { el.settings.close(); });
+
   // ---------- events ----------
+  let swiped = false;
   el.card.addEventListener("click", function () {
     if (swiped) { swiped = false; return; }
     flip();
@@ -451,6 +921,15 @@
   el.markedOnly.addEventListener("change", function () { rebuildOrder(); render(); });
   el.shuffle.addEventListener("change", function () { rebuildOrder(); render(); });
 
+  el.editBtn.addEventListener("click", function () {
+    if (!currentCard()) return;
+    requireToken(function () { openEditor("edit"); });
+  });
+  el.addBtn.addEventListener("click", function () {
+    requireToken(function () { openEditor("add"); });
+  });
+  el.settingsBtn.addEventListener("click", openSettings);
+
   el.exportBtn.addEventListener("click", exportMarks);
   el.importBtn.addEventListener("click", function () { el.importFile.click(); });
   el.importFile.addEventListener("change", function () {
@@ -462,13 +941,14 @@
     if (!confirm("Remove all " + marks.size + " marks from this device?")) return;
     marks.clear();
     saveMarks();
-    rebuildOrder(order.length ? order[index].id : null);
+    rebuildOrder(currentCard() && currentCard().id, index);
     render();
     toast("Marks cleared on this device");
   });
 
-  // Keyboard shortcuts (ignored while a control has focus).
+  // Keyboard shortcuts (ignored while a control or dialog has focus).
   document.addEventListener("keydown", function (e) {
+    if (document.querySelector("dialog[open]")) return;
     const tag = (e.target && e.target.tagName) || "";
     if (/INPUT|SELECT|TEXTAREA/.test(tag) && e.target.type !== "checkbox") return;
     if (e.metaKey || e.ctrlKey || e.altKey) return;
@@ -485,7 +965,7 @@
   });
 
   // Swipe left/right on the card to move between cards.
-  let touchX = null, touchY = null, swiped = false;
+  let touchX = null, touchY = null;
   el.card.addEventListener("touchstart", function (e) {
     swiped = false;
     touchX = e.touches[0].clientX;
@@ -506,6 +986,7 @@
   populateLectures();
   rebuildOrder();
   render();
+  loadLatest();
 })();
 </script>
 </body>
