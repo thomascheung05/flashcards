@@ -1296,7 +1296,7 @@ increased since 1700 then decreased after 1975 ish
 **Less aerosols means what for climate:**  
 Warmer
 
-**Since when has the been an imbalance in energy flux:**  
+**Since when has there been an imbalance in energy flux:**  
 1970
 
 **What is causing the imbalance in energy flux:**  
@@ -1364,7 +1364,8 @@ Antarctica has not declined like the arctic (trend is not clear)
 Top 30 m of ground has risen
 
 **How has salinity changed since 1950:**  
-Salinity contrast at large scale has increased
+Salinity contrast at large scale has increased.
+Salty places are saltier less salty places are fresher. 
 
 **The AMOC has been stable for the last ... years but has started to ... in ... :**  
 Stable in the last 8000 years but has started to decline in the 20th century
@@ -1517,7 +1518,7 @@ not enough ground water / water in rivers
 **Normally a ... drought will lead to a ... drought:**
 A meteorological drought will lead to a hydrological drought 
 
-**What causes a agriculture and ecological drought:**  
+**When are we in an Wagriculture aagriculture and ecological drought:**  
 When plants are water stressed
 
 **Climate change increasing drought is at what confidence level:**  
@@ -1532,10 +1533,10 @@ Uncertainty and regional differences
 \- Mediterranean  
 \- East Asia
 
-**It is … that rainfall will rates will increase:**  
+**It is … that tropical cyclone rainfall will increase:**  
 Very probable
 
-**How will the latitude of max intensity change in the western north pacific and what is the confidence for this:**  
+**How will the latitude of max intensity for cyclones change in the western north pacific and what is the confidence for this:**  
 Shift poleward  
 Probable
 
@@ -1550,7 +1551,7 @@ Very probable
 **The frequency or intensity of all extreme events has increased and will keep increasing with stronger warming, Except:**  
 Cold waves
 
-**What are the two drivers of change in extremes:**  
+**What are the two drivers of change of extreme events:**  
 Thermodynamics  
 Dynamics
 
@@ -1574,7 +1575,7 @@ Things that modify weather phenomena
 
 **What are some specific things that affect temperature extremes (3):**  
 \- Anthropogenic aerosols  
-\- irrigation and cropland expansion  
+\- Irrigation and cropland expansion  
 \- Urbanization
 
 **How do thermodynamic drivers affect precip extremes:**  
@@ -1598,7 +1599,7 @@ Thermodynamic are more global while dynamic are regional and more uncertain
 increase in atmospheric evaporative demand caused by changes in temp, wind speed, relative humidity
 
 **How do dynamic drivers affect drought:**  
-Changes in precipitatoin and sunshine duration
+Changes in precipitation and sunshine duration
 
 **what is the attribution process for extreme events (5):**  
 \- Identify  
@@ -1627,11 +1628,15 @@ Attribution = What is the most probable cause of the event
 
 **What is the risk based approach:**  
 How does the probability of a group of events happening change with anthro influence
+How much more likely did climate change make this event
+
+![](image-9.png)
 
 **What it the narrative approach (2):**  
 Asks two questions  
 \- Can the event be explained by atmospheric variability  
 \- How has anthro affected this atmospheric variability
+Why did this event happen and how is it affected by anthro
 
 **Climate change affects what part of the world:**  
 All of it
