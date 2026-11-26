@@ -1234,15 +1234,15 @@ Global heating necessary to bring earth back into equilibrium after doubling of 
 \- Mostly from Earth's building blocks (enstatite chondrites)  
 \- Some added later by water rich comets and outer asteroid belt material
 
-What is the strongest GHG:
+**What is the strongest GHG:**  
 Water vapour
 
-Why is water such a strong GHG:
-Absors widely across infrared
+**Why is water such a strong GHG:**  
+Absorbs widely across infrared
 
-Why do we talk more abotu CO2 than water vapour in terms of climate warming:
-- CO2 has longer atmospheric lifetime
-- We have direct impact on CO2 emissions
+**Why do we talk more about CO2 than water vapour in terms of climate warming:**  
+\- CO2 has longer atmospheric lifetime  
+\- We have direct impact on CO2 emissions
 
 **What are the 3 ways the water cycle plays a role in Earth's energy cycle:**  
 \- Radiative balance  
@@ -1273,8 +1273,8 @@ Both longwave and shortwave
 \- Glaciers created Great Lakes
 
 **What are the main processes of the water cycle (4):**  
-
-
+\- Evaporation  
+\- Transpiration  
 \- Condensation  
 \- Precipitation
 
@@ -1377,7 +1377,7 @@ Earth's crust
 \- ~28% absorbed by ocean (155 PgC)  
 \- ~29% absorbed by terrestrial biosphere (160 PgC)
 
-The amount of carbon the ocean and the biosphere can absorb changes with ... :**
+**The amount of carbon the ocean and the biosphere can absorb changes with ... :**  
 Temp
 
 **What is a PgC:**  
