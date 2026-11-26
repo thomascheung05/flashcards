@@ -1230,13 +1230,374 @@ Global heating necessary to bring earth back into equilibrium after doubling of 
 
 ### Water Cycle
 
+**Where did Earth's water come from (2):**  
+\- Mostly from Earth's building blocks (enstatite chondrites)  
+\- Some added later by water rich comets and outer asteroid belt material
+
+What is the strongest GHG:
+Water vapour
+
+Why is water such a strong GHG:
+Absors widely across infrared
+
+Why do we talk more abotu CO2 than water vapour in terms of climate warming:
+- CO2 has longer atmospheric lifetime
+- We have direct impact on CO2 emissions
+
+**What are the 3 ways the water cycle plays a role in Earth's energy cycle:**  
+\- Radiative balance  
+\- Heat transport  
+\- Shaping the terrestrial environment
+
+**What are the 3 ways the water cycle affects radiative balance:**  
+\- Water vapour as a GHG  
+\- Clouds  
+\- Albedo (snow and ice)
+
+**What are the 2 ways the water cycle transports heat:**  
+\- Latent heat release  
+\- Horizontal atmospheric and oceanic transport
+
+**What are the main contributions to the greenhouse effect (4):**  
+\- ~50% water vapour  
+\- ~25% clouds  
+\- ~20% CO2  
+\- Others (methane, N2O)
+
+**Clouds influence which radiation fluxes:**  
+Both longwave and shortwave
+
+**How does the water cycle shape the terrestrial environment (3):**  
+\- Water needed for life  
+\- Erosion (U-shaped glacial valleys, V-shaped canyons)  
+\- Glaciers created Great Lakes
+
+**What are the main processes of the water cycle (4):**  
+
+
+\- Condensation  
+\- Precipitation
+
+**What are the main water reservoirs (3):**  
+\- Oceans  
+\- Atmosphere  
+\- Ice, snow and underground
+
+**Transpiration is affected by what (2):**  
+\- Sun  
+\- CO2 (more CO2 = stomata smaller)
+
+**What is residence time:**  
+How long a water molecule stays in a reservoir before moving to another
+
+**What are the residence times of water in fossil, ice sheet, ocean, atmosphere:**  
+Fossil water under Sahara = 75 000 years  
+Antarctic ice sheet = 20 000 years  
+Ocean = 3 200 years  
+Atmosphere = 9 days
+
+**What percentage of earth's water is usable:**  
+3%
+
+**What is the soil water balance equation:**  
+dSm/dt = P - E - Rs - Rg  
+Precipitation - Evaporation - Surface Runoff - Drainage
+
+![](image-10.png)
+
+**When soil is saturated what happens:**  
+No more drainage so more runoff
+
+**What links the energy balance and the water balance:**  
+Evapotranspiration  
+FLH = -Lv * E
+Latent heat flux = latent heat of vaporation * evapotranspiration rate
+
+**Does wet or dry grass absorb water faster:**
+Wet grass  
+Very dry soil absorbs water slowly
+
+**On the E-P map, where is precip > evap (3):**  
+\- ITCZ  
+\- Storm tracks  
+\- Over mountains (Rockies, Himalayas)
+
+![](image-11.png)
+
+**On the E-P map, where is evap > precip:**  
+Subsidence regions (subtropics)
+
+**What is the intensification of the water cycle:**  
+As earth warms more water evaporates from the ocean  
+So more precipitation  
+Rich areas get richer, poor areas get poorer
+
+**By how much is the water cycle accelerating per degree:**  
+2-4% per °C since 1960
+
+**What is the evidence of water cycle intensification:**  
+Difference between high and low salinity regions is increasing  
+(5.2% for 1960-2017)  
+
+
 ## Lecture 5.2:
 
 ### Carbon Cycle
 
+**Are human CO2 emissions small compared to natural emissions:**  
+Yes, but natural reservoirs also absorb a lot (slightly more than they emit)  
+So natural emissions are balanced and human emissions are not
+
+![](image-12.png)
+
+**What are the time scales of the short and long term carbon cycle:**  
+Short = 1-100 years  
+Long = thousands - millions of years
+
+**What are the characteristics of the short term carbon cycle (2):**  
+\- Close to equilibrium  
+\- Minor role in climate change
+
+**What are the characteristics of the long term carbon cycle (3):**  
+\- Atmospheric carbon concentration changes over time  
+\- Glacial cycles (positive feedback)  
+\- Planet thermostat (negative feedback)
+
+**What are the 3 very general steps of the carbon cycle:**  
+\- Photosynthesis  
+\- Animals eating and breathing  
+\- CO2 available again for photosynthesis
+
+**Where is most carbon stored:**  
+Earth's crust  
+\>1000x ocean, >30 000x soils, >80 000x atmosphere
+
+**Where has the anthropogenic carbon gone (3):**  
+\- ~43% stayed in atmosphere (240 PgC)  
+\- ~28% absorbed by ocean (155 PgC)  
+\- ~29% absorbed by terrestrial biosphere (160 PgC)
+
+The amount of carbon the ocean and the biosphere can absorb changes with ... :**
+Temp
+
+**What is a PgC:**  
+Petagram of carbon (10^15 gC) = GtC
+
+**What is the name of the curve of CO2 measurements at Mauna Loa:**  
+Keeling Curve
+
+**Methane concentrations have ... compared to pre-industrial:**  
+Doubled
+
+**Why does the Keeling curve have a seasonal cycle:**  
+There is more photosynthesis during the summer and therefore less CO2.
+
+**Carbon absorption by land plants is comparable to ... :**  
+Absorption by phytoplankton (~50/50)
+
+**What happens to the carbon absorbed by photosynthesis (2):**  
+\- ~1/2 returned by plant respiration  
+\- ~1/2 stored in leaves, wood and roots (net primary production)
+
+**What happens to stored plant carbon after it dies (2):**  
+Aerobic = decomposed into CO2  
+Anaerobic = CH4
+
+**What are examples of terrestrial carbon reservoirs (2):**  
+\- Peatlands  
+\- Permafrost
+
+**Where are most forest fire emissions:**  
+Shallow soil layers (savannas, Africa)
+
+**What is the ocean-atmosphere CO2 flux equation:**  
+ΦCO2 = kCO2 (pW - pA)  
+Flux is proportional to partial pressure difference between water and air
+
+**What is the inorganic ocean carbon cycle:**  
+Equilibrium between carbonic acid (H2CO3), bicarbonate (HCO3-) and carbonate ions (CO3 2-)
+
+**What are the 3 reactions of the inorganic ocean carbon cycle:**  
+CO2 + H2O ⇌ H2CO3  
+H2CO3 ⇌ H(+) + HCO3 (-)  
+HCO3- ⇌ H(+) + CO3 (2-)
+
+**What is DIC and how do you calculate it:**  
+Dissolved Inorganic Carbon  
+DIC = [H2CO3] + [HCO3-] + [CO3 2-]
+
+**At equilibrium what is the proportion of DIC:**  
+Bicarbonate = 90%  
+Carbonate = 10%  
+Carbonic acid = 0.5%
+
+**What is the chemical buffer reaction:**  
+CO2 + CO3 (2-) + H2O ⇌ 2HCO3(-)
+
+**What does the chemical buffer do (2):**  
+\- Finds new equilibrium in 1 minute  
+\- Allows water to take up more CO2 than it otherwise could
+
+**What is KH:**  
+Solubility of CO2  
+KH = [H2CO3] / pCO2  
+(Henry's law)
+
+**How does CO2 solubility change with temperature:**  
+Temp increases = solubility decreases
+KH decreases with temp 
+
+**Why is KH important:**  
+Determines carbon storage in the ocean
+
+**Where is ocean-atmosphere CO2 flux positive and negative:**  
+Positive (ocean emits) = tropics  
+Negative (ocean absorbs) = high latitudes  
+Depends on water temperature
+
+**What is alkalinity:**  
+Excess of bases over acids in water  
+Alk = [HCO3-] + 2[CO3 2-] + [OH-] - [H+] + [B(OH)4-] + minor bases
+
+**Total alkalinity is dominated by:**  
+Bicarbonate H2CO3 and carbonate ions
+
+**What are the 3 ocean carbon pumps:**  
+\- Soft tissue pump  
+\- Carbonate pump  
+\- Solubility pump
+
+**What is the soft tissue pump (3):**  
+\- Phytoplankton photosynthesis turns CO2 and water into organic matter  
+\- Organic matter remineralised back to inorganic carbon by respiration  
+\- A fraction sinks from surface to depth
+
+**What is the photosynthesis equation:**  
+6CO2 + 6H2O ⇌ C6H12O6 + 6O2
+
+**What is the carbonate pump:**  
+Species produce calcium carbonate  
+Ca2+ + 2HCO3- ⇌ CaCO3 + CO2 + H2O
+
+**Why is the carbonate pump important:**  
+Influences both DIC and Alk  
+Decreases Alk which means losing CO3 (decreases by factor 2)
+
+**Where does calcite and aragonite dissolve:**  
+At depth, after particles and dead organisms fall
+
+**What is the solubility pump:**  
+Cold surface water sinks at high latitudes  
+Cold = high CO2 solubility = high DIC
+
+**Because of the 3 pumps DIC is ... at depth:**  
+~15% higher than at surface  
+Makes atmospheric CO2 lower than if ocean was homogeneous
+
+**What happens when deep water upwells:**  
+CO2 escapes due to high DIC and less solubility  
+Partially compensated by biological activity
+
+**What is the saturation state Ω:**  
+Ω = [Ca2+] x [CO3 2-] (dissolved stuff) / [CaCO3] (Shell / Skeleton (aragonite))
+
+**What do the saturation states mean (3):**  
+Ω = 1 = equilibrium (no dissolving or precipitating)  
+Ω > 1 = supersaturated (aragonite precipitates)  
+Ω < 1 = undersaturated (aragonite dissolves)
+
+**What is ocean acidification:**  
+CO2 added to sea surface increases acidity
+
+**What is the effect of ocean acidification:**  
+Less aragonite = more acidic  
+Shells dissolve, coral bleaching
+
+**Glacial carbon cycle is what kind of feedback:**  
+Positive
+
+**Can the biosphere explain the glacial CO2 decrease and why:**  
+No  
+Less land for vegetation, drier, more deserts = less carbon storage on land  
+(+20 ppm in glacial period)
+
+**Can the geological carbon cycle explain the glacial CO2 decrease and why:**  
+No  
+Too slow
+
+**What are the 4 possible causes of the glacial CO2 decrease:**  
+\- CO2 solubility increase with cold temp (only ~20 ppm)  
+\- Changes to Southern Ocean upwelling of deep water rich in DIC  
+\- More iron (dust) transported to Southern Ocean = more biological production  
+\- Phytoplankton shift to species that don't form CaCO3 = weaker carbonate pump
+
+**What percentage of deep water resurfaces in the Southern Ocean:**  
+Up to 80%
+
+**How old is the water upwelling in the Southern Ocean:**  
+Up to 1000 years  
+Reflects pre-industrial world (120 ppm less CO2, 1 °C cooler)
+
+**How do we know about Southern Ocean upwelling in the past:**  
+Nitrogen isotopes in fossil diatoms  
+More upwelling = more surface nitrogen
+
+**What are the 3 reactions of the long term carbon cycle:**  
+Sedimentation = Ca2+ + CO3 2- → CaCO3  
+Metamorphism = CaCO3 + SiO2 → CaSiO3 + CO2  
+Weathering = CaSiO3 + H2CO3 → CaCO3 + SiO2 + H2O
+
+**What is sedimentation in the long term carbon cycle:**  
+CaCO3 buried in sediments to make limestone  
+Mostly in shallow seas
+
+**What is metamorphism in the long term carbon cycle:**  
+During subduction limestone transformed into silico-calcic rocks  
+Releases CO2 back to atmosphere through volcanoes
+
+**What is weathering in the long term carbon cycle (2):**  
+\- Calcium silicate rocks lifted to surface are weathered  
+\- Products carried by rivers to ocean
+
+**What does weathering do to atmospheric CO2:**  
+Reduces it by absorbing carbonic acid  
+And increases ocean alkalinity
+
+**What is Earth's thermostat:**  
+Warmer = higher temp, precip, vegetation = more weathering = more CO2 removed = cooling  
+Colder = less weathering = less CO2 removed = warming
+
 ## Lecture 5.3:
 
 ### Methan Cycle
+
+**What are the natural sources of methane (4):**  
+\- Wetlands  
+\- Digestive tracts of termites and ruminants  
+\- Methanogenic bacteria in ocean and land  
+\- Incomplete combustion of biomass
+
+**What are the anthropogenic sources of methane (4):**  
+\- Coal extraction / natural gas leakage  
+\- Rice farming / more ruminants  
+\- Runoff containing fertilizers  
+\- Waste water
+
+**What are the 2 sinks of methane:**  
+\- Oxidation in atmosphere (OH)  
+\- Oxidation in soil by methanotrophic bacteria (O2)
+
+**How can we reduce methane output:**  
+Eat less meat
+
+**Observed methane concentration is a result of:**  
+Balance between sources and sinks (oxidation of methane)
+
+**What is the first step of methane oxidation:**  
+CH4 + OH → CH3 + H2O
+
+**What is the net methane oxidation reaction:**  
+CH4 + 10O2 → CO2 + H2O + 5O3 + 2OH
 
 ## Lecture 6.0:
 
